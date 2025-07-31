@@ -8,7 +8,7 @@ const Hero = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" as const }, // Explicitly type ease
+      transition: { duration: 0.8, ease: "easeOut" as const },
     },
   };
 
@@ -37,7 +37,7 @@ const Hero = () => {
     >
       <Image 
         src="/jos.jpg"
-        alt="Josvil portfolio background" // Improved alt text
+        alt="Josvil portfolio background"
         fill
         className="object-cover"
         priority

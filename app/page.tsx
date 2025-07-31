@@ -3,18 +3,14 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  FiSend,
+
   FiGithub,
   FiExternalLink,
-  FiMail,
-  FiPhone,
-  FiLinkedin,
-  FiMapPin,
+
   FiCode,
-  FiSmartphone,
+
   FiGlobe,
-  FiDatabase,
-  FiLayout,
+
   FiServer,
 } from "react-icons/fi";
 import Hero from "./Components/Hero";
@@ -133,8 +129,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       {/* Hero Section */}
-    <Hero />
-   
+      <Hero />
+
       {/* Services Section */}
       <section className="py-20 px-16 z-10 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto px-6">
@@ -147,7 +143,7 @@ export default function Home() {
             <h2 className="text-5xl text-start md:text-6xl font-bold text-black dark:text-white mb-6">
               What I Do
             </h2>
-            
+
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -160,11 +156,11 @@ export default function Home() {
                 whileHover={{ y: -5 }}
                 className="bg-transparent opacity-70 flex   border-2 border-orange-700 hover:border-red-500 transition-all duration-300"
               >
-                
+
                 <div className=""><h3 className="text-xl py-6 px-4 font-bold text-black mb-3">
                   {service.title}
                 </h3>
-                <p className="text-gray-700 p-4">{service.description}</p>
+                  <p className="text-gray-700 p-4">{service.description}</p>
                 </div>
                 <div className="text-orange-800 text-48 pt-18 p-4 hover:text-white justify-center bg-amber-600 ">{service.icon}</div>
               </motion.div>
@@ -197,14 +193,14 @@ export default function Home() {
                 whileHover={{ y: -5 }}
                 className="bg-gray-200 flex  overflow-hidden border border-gray-300 hover:border-blue-500 transition-all duration-300"
               >
-                
+
 
                 <div className="py-4 px-2">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-xl font-bold text-black">
                       {project.title}
                     </h3>
-                    
+
                   </div>
 
                   <p className="text-gray-900 mb-4 text-sm">
@@ -253,7 +249,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-     
+
     </div>
   );
 }
