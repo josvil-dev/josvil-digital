@@ -298,14 +298,14 @@ export default function Home() {
                                 Get In Touch
                             </motion.span>
                             <motion.h2 variants={fadeInUp} className="text-4xl lg:text-5xl font-bold text-white mb-6">
-                                Let's Build Something{' '}
+                                Let&apos;s Build Something{' '}
                                 <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-cyan-300 bg-clip-text text-transparent">
                                     Amazing Together
                                 </span>
                             </motion.h2>
                             <motion.p variants={fadeInUp} className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
                                 Whether you have a project in mind or just want to chat about technology, 
-                                I'd love to hear from you. Let's create something extraordinary.
+                                I&apos;d love to hear from you. Let&apos;s create something extraordinary.
                             </motion.p>
                             
                             <motion.div

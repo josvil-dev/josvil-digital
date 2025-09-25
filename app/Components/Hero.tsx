@@ -132,7 +132,7 @@ const Hero = () => {
                                     className="group w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_rgba(99,102,241,0.3)] hover:shadow-indigo-500/25 relative overflow-hidden"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    <span className="relative z-10">Let's Talk</span>
+                                    <span className="relative z-10">Let&apos;s Talk</span>
                                     <motion.span
                                         className="relative z-10 text-xl"
                                         animate={{ x: [0, 5, 0] }}

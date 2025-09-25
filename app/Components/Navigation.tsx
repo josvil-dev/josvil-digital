@@ -87,7 +87,7 @@ const Navbar = () => {
                                 href="/contact"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)]"
                             >
-                                Let's Talk
+                                Let&apos;s Talk
                                 <ArrowRight size={16} />
                             </Link>
                         </motion.div>
@@ -143,7 +143,7 @@ const Navbar = () => {
                                     onClick={() => setIsMenuOpen(false)}
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold w-full justify-center"
                                 >
-                                    Let's Talk
+                                    Let&apos;s Talk
                                     <ArrowRight size={16} />
                                 </Link>
                             </motion.div>
@@ -208,7 +208,7 @@ const Footer = () => {
                         </div>
                         <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
                             Crafting digital experiences that blend beautiful design with robust engineering. 
-                            Let's build something amazing together.
+                            Let&apos;s build something amazing together.
                         </p>
                         
                         {/* Contact Info */}
