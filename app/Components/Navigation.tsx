@@ -10,6 +10,7 @@ const Navbar = () => {
     const { isDarkMode } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [typewriterKey, setTypewriterKey] = useState(0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -18,6 +19,15 @@ const Navbar = () => {
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Typewriter effect restart every 15 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTypewriterKey(prev => prev + 1);
+        }, 15000);
+
+        return () => clearInterval(interval);
     }, []);
 
     // Theme-aware classes
@@ -29,7 +39,7 @@ const Navbar = () => {
             : (isScrolled 
                 ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-lg' 
                 : 'bg-transparent'),
-        logo: isDarkMode ? 'text-white font-semibold text-xl hidden sm:block' : 'text-gray-900 font-semibold text-xl hidden sm:block',
+        logo: isDarkMode ? 'text-white font-mono capitalize font-semibold text-xl hidden sm:block' : 'text-gray-900 font-semibold text-xl hidden sm:block',
         ctaButton: isDarkMode ? 'inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)]' : 'inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)]',
         mobileButton: isDarkMode ? 'md:hidden p-2 text-white bg-white/10 backdrop-blur-sm rounded-lg border border-white/10' : 'md:hidden p-2 text-gray-700 bg-gray-900/10 backdrop-blur-sm rounded-lg border border-gray-300/30',
         mobileMenu: isDarkMode ? 'md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/10' : 'md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200/50',
@@ -38,10 +48,8 @@ const Navbar = () => {
     };
 
     const navItems = [
-        { name: 'Home', href: '/' },
         { name: 'About', href: '/about' },
         { name: 'Work', href: '/work' },
-        { name: 'Services', href: '/services' },
         { name: 'Contact', href: '/contact' },
     ];
 
@@ -65,7 +73,35 @@ const Navbar = () => {
                                 <span className="text-white font-bold text-lg">JV</span>
                             </div>
                             <span className={themeClasses.logo}>
-                                Joshua Vilanculo
+                                {"JOSVIL_".split("").map((char, index) => (
+                                    <motion.span
+                                        key={`${typewriterKey}-${index}`}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{
+                                            duration: 0.05,
+                                            delay: 0.5 + index * 0.1,
+                                            ease: "easeInOut"
+                                        }}
+                                        style={{ display: "inline-block" }}
+                                    >
+                                        {char}
+                                    </motion.span>
+                                ))}
+                                <motion.span
+                                    key={`cursor-${typewriterKey}`}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: [0, 1, 0] }}
+                                    transition={{
+                                        duration: 0.8,
+                                        repeat: Infinity,
+                                        delay: 1.3,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="ml-1"
+                                >
+                                    |
+                                </motion.span>
                             </span>
                         </Link>
                     </motion.div>
@@ -82,7 +118,7 @@ const Navbar = () => {
                             >
                                 <Link
                                     href={item.href}
-                                    className={`relative font-bold transition-colors duration-300 flex items-center gap-1 ${
+                                    className={`relative font-normal transition-colors duration-300 flex items-center gap-1 ${
                                         isDarkMode 
                                             ? 'text-white/90 hover:text-white' 
                                             : 'text-gray-700 hover:text-gray-900'
@@ -122,23 +158,36 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {/* CTA Button - Right Side */}
-                    <div className="hidden md:flex items-center ml-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.5 }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link
-                                href="/contact"
-                                className={themeClasses.ctaButton}
-                            >
-                                Let&apos;s Talk
-                                <ArrowRight size={16} />
-                            </Link>
-                        </motion.div>
+                    {/* Social Icons - Right Side */}
+                    <div className="hidden md:flex items-center gap-4 ml-auto">
+                        {[
+                            { name: 'GitHub', href: 'https://github.com', icon: Github },
+                            { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
+                            { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
+                        ].map((social, index) => {
+                            const Icon = social.icon;
+                            return (
+                                <motion.a
+                                    key={social.name}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                                    whileHover={{ scale: 1.1, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className={`p-2 rounded-lg transition-all duration-300 ${
+                                        isDarkMode 
+                                            ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/80'
+                                    }`}
+                                    aria-label={social.name}
+                                >
+                                    <Icon size={20} />
+                                </motion.a>
+                            );
+                        })}
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -180,20 +229,40 @@ const Navbar = () => {
                                     </Link>
                                 </motion.div>
                             ))}
+                            {/* Mobile Social Icons */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.3, delay: 0.5 }}
-                                className="pt-4"
+                                className={`pt-4 border-t ${isDarkMode ? 'border-white/10' : 'border-gray-200/30'}`}
                             >
-                                <Link
-                                    href="/contact"
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className={themeClasses.mobileCTA}
-                                >
-                                    Let&apos;s Talk
-                                    <ArrowRight size={16} />
-                                </Link>
+                                <div className="flex justify-center gap-6">
+                                    {[
+                                        { name: 'GitHub', href: 'https://github.com', icon: Github },
+                                        { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
+                                        { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
+                                    ].map((social, index) => {
+                                        const Icon = social.icon;
+                                        return (
+                                            <motion.a
+                                                key={social.name}
+                                                href={social.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                whileHover={{ scale: 1.1, y: -2 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className={`p-3 rounded-full transition-all duration-300 ${
+                                                    isDarkMode 
+                                                        ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20' 
+                                                        : 'bg-gray-900/5 border border-gray-200/30 text-gray-700 hover:bg-gray-900/10 hover:border-gray-300/50'
+                                                }`}
+                                                aria-label={social.name}
+                                            >
+                                                <Icon size={18} />
+                                            </motion.a>
+                                        );
+                                    })}
+                                </div>
                             </motion.div>
                         </div>
                     </motion.div>
@@ -288,18 +357,18 @@ const Footer = () => {
                             <div className={`flex items-center gap-3 ${themeClasses.contactText}`}>
                                 <Mail size={18} className="text-indigo-400" />
                                 <a href="mailto:joshua@example.com" className={themeClasses.contactLink}>
-                                    joshua@example.com
+                                    josilanculo@gmail.com
                                 </a>
                             </div>
                             <div className={`flex items-center gap-3 ${themeClasses.contactText}`}>
                                 <Phone size={18} className="text-indigo-400" />
-                                <a href="tel:+1234567890" className={themeClasses.contactLink}>
-                                    +1 (234) 567-890
+                                <a href="tel:+27639533676" className={themeClasses.contactLink}>
+                                    +27 63 953 3676
                                 </a>
                             </div>
                             <div className={`flex items-center gap-3 ${themeClasses.contactText}`}>
                                 <MapPin size={18} className="text-indigo-400" />
-                                <span>Cape Town, South Africa</span>
+                                <span> South Africa</span>
                             </div>
                         </div>
 
