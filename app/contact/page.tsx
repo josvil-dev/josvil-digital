@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
@@ -120,7 +121,7 @@ function ContactForm({ isDarkMode }: { isDarkMode: boolean }) {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setSubmitMessage('Thank you for your message! I\'ll get back to you soon.');
+        setSubmitMessage('Thank you for your message! I&apos;ll get back to you soon.');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         throw new Error('Failed to send message');
@@ -418,7 +419,7 @@ export default function Contact() {
             </motion.h1>
             <motion.p variants={fadeInUp} className={`${themeClasses.description} max-w-3xl mx-auto mb-12`}>
               Have a project in mind? Want to collaborate on something amazing? 
-              Or just want to say hello? I'd love to hear from you. Let's create 
+              Or just want to say hello? I&apos;d love to hear from you. Let&apos;s create 
               something extraordinary together.
             </motion.p>
           </motion.div>

@@ -1,9 +1,84 @@
-//robots.txt
- 
-# Block all crawlers for /accounts
+# Robots.txt for josvil.digital
+# Generated on September 26, 2025
+
+# Allow all web crawlers to access the site
 User-agent: *
-Disallow: /accounts
- 
-# Allow all crawlers
-User-agent: *
+
+# Allow crawling of main pages
 Allow: /
+Allow: /about
+Allow: /work
+Allow: /contact
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /data/
+
+# Disallow common WordPress/CMS paths (security)
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/
+Disallow: /administrator/
+Disallow: /login/
+Disallow: /dashboard/
+
+# Disallow development and system files
+Disallow: /_next/
+Disallow: /.next/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Allow static assets
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.css$
+Allow: /*.js$
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://josvil.digital/sitemap.xml
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+User-agent: Bingbot
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+User-agent: Slurp
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /

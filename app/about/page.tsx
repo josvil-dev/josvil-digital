@@ -317,7 +317,7 @@ export default function About() {
               <motion.div variants={fadeInUp} className="space-y-8">
                 <div>
                   <h2 className={`text-3xl lg:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
-                    Hey, I'm Joshua! 👋
+                    Hey, I&apos;m Joshua! 👋
                   </h2>
                   <p className={`${themeClasses.description} text-xl leading-relaxed mb-6`}>
                     Welcome to the intersection of design and technology, where creativity and 
@@ -335,7 +335,7 @@ export default function About() {
                   <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-lg leading-relaxed`}>
                     I specialize in bridging the gap between design and development, ensuring that 
                     every pixel serves a purpose and every interaction feels intuitive. From concept 
-                    to deployment, I'm committed to delivering exceptional results.
+                    to deployment, I&apos;m committed to delivering exceptional results.
                   </p>
                 </div>
 
