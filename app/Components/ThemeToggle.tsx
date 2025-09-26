@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'framer-motion';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { useTheme } from '../contexts/ThemeContext';
 import { useState, useEffect } from 'react';

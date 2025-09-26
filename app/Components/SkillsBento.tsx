@@ -1,22 +1,21 @@
 'use client';
-import { motion, useAnimation } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { BsWordpress } from 'react-icons/bs';
-import { FaCode, FaServer, FaPalette } from 'react-icons/fa';
+import { FaCode, FaServer } from 'react-icons/fa';
 import { FaReact, FaNodeJs, FaPython, FaDatabase, FaFigma, FaAws, FaDocker, FaMobileAlt, FaPaintBrush, FaCloud, FaGithub, FaJs, FaHtml5, FaCss3Alt } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiTailwindcss, SiMongodb, SiPostgresql, SiAdobexd, SiFramer, SiVercel, SiDrupal, SiGooglecloud, SiLaravel, SiWebflow, SiSharp, SiDotnet, SiPhp } from 'react-icons/si';
+import { SiNextdotjs, SiTypescript, SiTailwindcss, SiVercel, SiDrupal, SiGooglecloud, SiLaravel, SiWebflow, SiSharp, SiDotnet, SiPhp } from 'react-icons/si';
 import { useTheme } from '../contexts/ThemeContext';
 
 const SkillsBento = () => {
     const { isDarkMode } = useTheme();
     const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-    const controls = useAnimation();
 
     // Theme-aware classes
     const themeClasses = {
         section: isDarkMode 
-            ? "relative py-4 bg-slate-900" 
-            : "relative py-4 bg-gray-50",
+            ? "relative py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-900" 
+            : "relative py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50",
         gradient: isDarkMode 
             ? "absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800/50 to-slate-900" 
             : "absolute inset-0 bg-gradient-to-b from-gray-50 via-gray-100/50 to-gray-50",
@@ -33,29 +32,29 @@ const SkillsBento = () => {
             ? "text-indigo-300 font-medium text-lg mb-4 block" 
             : "text-indigo-600 font-medium text-lg mb-4 block",
         mainHeading: isDarkMode 
-            ? "text-4xl lg:text-5xl font-bold text-white mb-6" 
-            : "text-4xl lg:text-5xl font-bold text-gray-900 mb-6",
+            ? "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6" 
+            : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6",
         gradientText: isDarkMode 
             ? "bg-gradient-to-r from-indigo-300 via-purple-300 to-cyan-300 bg-clip-text text-transparent" 
             : "bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent",
         description: isDarkMode 
-            ? "text-gray-300 text-lg max-w-2xl mx-auto" 
-            : "text-gray-600 text-lg max-w-2xl mx-auto",
+            ? "text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto" 
+            : "text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto",
         card: isDarkMode 
             ? "group relative bg-gradient-to-br from-slate-800/60 to-slate-700/40 rounded-3xl border border-white/10 backdrop-blur-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-white/20" 
             : "group relative bg-gradient-to-br from-white/80 to-gray-50/60 rounded-3xl border border-gray-200/50 backdrop-blur-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-gray-300/60 shadow-lg hover:shadow-xl",
         cardTitle: isDarkMode 
-            ? "text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-200 transition-all duration-300" 
-            : "text-xl font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-700 transition-all duration-300",
+            ? "text-lg sm:text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-200 transition-all duration-300" 
+            : "text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-700 transition-all duration-300",
         cardDescription: isDarkMode 
-            ? "text-gray-400 text-sm mb-4 group-hover:text-gray-300 transition-colors duration-300" 
-            : "text-gray-600 text-sm mb-4 group-hover:text-gray-500 transition-colors duration-300",
+            ? "text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4 group-hover:text-gray-300 transition-colors duration-300" 
+            : "text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 group-hover:text-gray-500 transition-colors duration-300",
         iconContainer: isDarkMode 
-            ? "w-16 h-16 flex items-center justify-center text-3xl rounded-lg bg-slate-800/60 border border-white/10 shadow-lg text-white" 
-            : "w-16 h-16 flex items-center justify-center text-3xl rounded-lg bg-white/80 border border-gray-200/50 shadow-lg text-gray-700",
+            ? "w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl sm:text-3xl rounded-lg bg-slate-800/60 border border-white/10 shadow-lg text-white" 
+            : "w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl sm:text-3xl rounded-lg bg-white/80 border border-gray-200/50 shadow-lg text-gray-700",
         skillText: isDarkMode 
-            ? "text-gray-300 text-sm font-medium group-hover:text-white transition-colors duration-300" 
-            : "text-gray-600 text-sm font-medium group-hover:text-gray-800 transition-colors duration-300",
+            ? "text-gray-300 text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300" 
+            : "text-gray-600 text-xs sm:text-sm font-medium group-hover:text-gray-800 transition-colors duration-300",
         ctaButton: isDarkMode 
             ? "inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 rounded-full border border-white/10 backdrop-blur-sm font-medium" 
             : "inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-600 rounded-full border border-indigo-200/50 backdrop-blur-sm font-medium",
@@ -85,7 +84,7 @@ const SkillsBento = () => {
             ],
             icon: <FaCode />,
             color: "from-blue-500 to-cyan-500",
-            size: "col-span-2 row-span-2",
+            size: "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
             description: "Core programming languages I use to build applications",
             toolIcons: [
                 <FaJs key="js" />,
@@ -160,22 +159,7 @@ const SkillsBento = () => {
         tap: { scale: 0.98 }
     };
 
-    // Example logos for the first card (replace with your actual logo paths in /public)
-    const toolLogos = [
-        '/react-logo.png',
-        '/nextjs-logo.png',
-        '/ts-logo.png',
-        '/tailwind-logo.png',
-        '/js-logo.png',
-    ];
-    // Example images for other cards (replace as needed)
-    const cardImages = [
-        '/node-logo.png',
-        '/python-logo.png',
-        '/postgres-logo.png',
-        '/mongo-logo.png',
-        '/docker-logo.png',
-    ];
+   
 
     return (
         <section className={themeClasses.section}>
@@ -209,14 +193,14 @@ const SkillsBento = () => {
                     ))}
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
                 {/* Header */}
                 <motion.div
                     initial="initial"
                     whileInView="animate"
                     viewport={{ once: true, margin: "-100px" }}
                     variants={staggerContainer}
-                    className="text-center mb-16"
+                    className="text-center mb-8 sm:mb-12 md:mb-16"
                 >
                     <motion.span variants={fadeInUp} className={themeClasses.sectionLabel}>
                         Technical Skills
@@ -237,16 +221,17 @@ const SkillsBento = () => {
                     whileInView="animate"
                     viewport={{ once: true, margin: "-100px" }}
                     variants={staggerContainer}
-                    className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[200px]"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] sm:auto-rows-[200px] lg:auto-rows-[220px]"
                 >
                     {skillsData.map((skill, idx) => {
                         if (idx === 3) {
                             // Replace the removed 4th card with the CTA
                             return (
-                                <div key="cta-replace" className="flex items-center justify-center col-span-1 row-span-1">
-                                    <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 rounded-full border border-white/10 backdrop-blur-sm font-medium">
+                                <div key="cta-replace" className="flex items-center justify-center col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 row-span-1">
+                                    <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 rounded-full border border-white/10 backdrop-blur-sm font-medium text-sm sm:text-base">
                                         <span>✨</span>
-                                        <span>Always learning new technologies</span>
+                                        <span className="hidden sm:inline">Always learning new technologies</span>
+                                        <span className="sm:hidden">Always learning</span>
                                         <span>🚀</span>
                                     </div>
                                 </div>
@@ -274,6 +259,7 @@ const SkillsBento = () => {
                                 whileTap="tap"
                                 onHoverStart={() => setHoveredCard(skill.id)}
                                 onHoverEnd={() => setHoveredCard(null)}
+                                onTap={() => setHoveredCard(hoveredCard === skill.id ? null : skill.id)}
                                 className={`${customSize} ${themeClasses.card}`}
                                 style={{
                                     transformStyle: 'preserve-3d',
@@ -284,18 +270,18 @@ const SkillsBento = () => {
                                 <div className={`absolute inset-0 bg-gradient-to-br ${skill.color}/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                                 {/* Animated border gradient */}
                                 <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-300`} />
-                                <div className="relative p-6 h-full flex flex-col justify-between z-10">
+                                <div className="relative p-4 sm:p-5 lg:p-6 h-full flex flex-col justify-between z-10">
                                     {/* Icon and title */}
                                     <div>
                                         <motion.div 
-                                            className={`inline-flex p-3 rounded-2xl bg-gradient-to-r ${skill.color}/20 mb-4`}
+                                            className={`inline-flex p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-gradient-to-r ${skill.color}/20 mb-3 sm:mb-4`}
                                             animate={hoveredCard === skill.id ? { 
                                                 scale: [1, 1.1, 1],
                                                 rotate: [0, 5, -5, 0]
                                             } : {}}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <span className="text-2xl text-white">{skill.icon}</span>
+                                            <span className="text-xl sm:text-2xl text-white">{skill.icon}</span>
                                         </motion.div>
                                         <h3 className={themeClasses.cardTitle}>
                                             {skill.title}
@@ -306,13 +292,13 @@ const SkillsBento = () => {
                                     </div>
                                    
                                     <motion.div
-                                        className="absolute left-0 right-0 bottom-0 px-6 pb-6"
+                                        className="absolute left-0 right-0 bottom-0 px-4 sm:px-6 pb-4 sm:pb-6"
                                         initial={{ y: 60, opacity: 0 }}
                                         animate={hoveredCard === skill.id ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
                                         transition={{ duration: 0.4 }}
                                         style={{ pointerEvents: 'none' }}
                                     >
-                                        <div className={`grid grid-cols-4 gap-2 rounded-xl p-2 ${isDarkMode ? 'bg-slate-900/80' : 'bg-white/60 border border-gray-200/30'}`}>
+                                        <div className={`grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2 rounded-lg sm:rounded-xl p-2 ${isDarkMode ? 'bg-slate-900/80' : 'bg-white/60 border border-gray-200/30'}`}>
                                             {skill.toolIcons && skill.toolIcons.map((icon, i) => (
                                                 <span
                                                     key={i}
@@ -394,7 +380,7 @@ const SkillsBento = () => {
                     whileInView="animate"
                     viewport={{ once: true, margin: "-100px" }}
                     variants={fadeInUp}
-                    className="text-center mt-16"
+                    className="text-center mt-8 sm:mt-12 md:mt-16"
                 >
                     <div className={themeClasses.ctaButton}>
                         <span>✨</span>

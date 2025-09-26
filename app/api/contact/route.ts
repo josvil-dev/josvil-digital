@@ -75,7 +75,7 @@ function sanitizeInput(input: string): string {
 }
 
 // Validate contact form data
-function validateContactData(data: any): { isValid: boolean; errors: string[] } {
+function validateContactData(data: { name?: unknown; email?: unknown; subject?: unknown; message?: unknown }): { isValid: boolean; errors: string[] } {
   const errors: string[] = [];
 
   // Check required fields
@@ -96,19 +96,19 @@ function validateContactData(data: any): { isValid: boolean; errors: string[] } 
   }
 
   // Check for excessively long inputs to prevent abuse
-  if (data.name && data.name.length > 100) {
+  if (typeof data.name === 'string' && data.name.length > 100) {
     errors.push('Name is too long (maximum 100 characters)');
   }
 
-  if (data.email && data.email.length > 255) {
+  if (typeof data.email === 'string' && data.email.length > 255) {
     errors.push('Email is too long (maximum 255 characters)');
   }
 
-  if (data.subject && data.subject.length > 200) {
+  if (typeof data.subject === 'string' && data.subject.length > 200) {
     errors.push('Subject is too long (maximum 200 characters)');
   }
 
-  if (data.message && data.message.length > 2000) {
+  if (typeof data.message === 'string' && data.message.length > 2000) {
     errors.push('Message is too long (maximum 2000 characters)');
   }
 

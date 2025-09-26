@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Github, Twitter, Linkedin, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Menu, X, Github, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 // Navbar Component
@@ -241,7 +241,7 @@ const Navbar = () => {
                                         { name: 'GitHub', href: 'https://github.com', icon: Github },
                                         { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
                                         { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
-                                    ].map((social, index) => {
+                                    ].map((social) => {
                                         const Icon = social.icon;
                                         return (
                                             <motion.a

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { 
   Mail, Calendar, User, MessageCircle, Loader2, 
-  RefreshCw, AlertCircle, CheckCircle, Eye, EyeOff,
+  RefreshCw, AlertCircle, Eye, EyeOff,
   Lock, Shield, LogOut
 } from 'lucide-react';
 
@@ -68,7 +68,7 @@ function LoginForm({ onLogin, isDarkMode }: { onLogin: (password: string) => Pro
           setError(`${data.error}. ${data.remainingAttempts} attempts remaining.`);
         }
       }
-    } catch (err) {
+    } catch {
       setError('Network error. Please try again.');
     } finally {
       setIsLoading(false);
@@ -187,9 +187,7 @@ export default function AdminContactsPage() {
   const [contacts, setContacts] = useState<ContactData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedContact, setSelectedContact] = useState<ContactData | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authPassword, setAuthPassword] = useState('');
 
   // Check authentication status on component mount
   useEffect(() => {
@@ -201,11 +199,10 @@ export default function AdminContactsPage() {
         const isValid = Date.now() - timestamp < 24 * 60 * 60 * 1000;
         if (isValid && token && password === 'j05vi1') {
           setIsAuthenticated(true);
-          setAuthPassword(password);
         } else {
           localStorage.removeItem('admin_auth');
         }
-      } catch (err) {
+      } catch {
         localStorage.removeItem('admin_auth');
       }
     }
@@ -226,7 +223,6 @@ export default function AdminContactsPage() {
 
       if (data.success) {
         setIsAuthenticated(true);
-        setAuthPassword(password);
         // Save authentication to localStorage with token
         localStorage.setItem('admin_auth', JSON.stringify({
           password,
@@ -245,7 +241,6 @@ export default function AdminContactsPage() {
   // Handle logout
   const handleLogout = () => {
     setIsAuthenticated(false);
-    setAuthPassword('');
     localStorage.removeItem('admin_auth');
   };
 
@@ -263,7 +258,7 @@ export default function AdminContactsPage() {
       } else {
         setError(data.error || 'Failed to fetch contacts');
       }
-    } catch (err) {
+    } catch {
       setError('Network error occurred');
     } finally {
       setIsLoading(false);
@@ -436,7 +431,7 @@ export default function AdminContactsPage() {
                   </p>
                 </motion.div>
               ) : (
-                contacts.map((contact, index) => (
+                contacts.map((contact) => (
                   <motion.div
                     key={contact.id}
                     variants={fadeInUp}

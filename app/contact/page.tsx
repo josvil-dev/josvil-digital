@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { 
   Mail, Phone, MapPin, Send, Clock, User, MessageCircle, 
-  CheckCircle, AlertCircle, Loader2, ExternalLink,
+  CheckCircle, AlertCircle, Loader2, 
   Github, Linkedin, Twitter
 } from 'lucide-react';
 
@@ -126,7 +126,7 @@ function ContactForm({ isDarkMode }: { isDarkMode: boolean }) {
       } else {
         throw new Error('Failed to send message');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
       setSubmitMessage('Sorry, there was an error sending your message. Please try again.');
     } finally {
@@ -413,7 +413,7 @@ export default function Contact() {
               Get In Touch
             </motion.span>
             <motion.h1 variants={fadeInUp} className={themeClasses.heading}>
-              Let's <span className={themeClasses.gradientText}>Work</span>
+              Let&apos;s <span className={themeClasses.gradientText}>Work</span>
               <br />
               Together
             </motion.h1>

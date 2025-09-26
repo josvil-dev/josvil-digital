@@ -22,24 +22,6 @@ const staggerContainer = {
   }
 };
 
-const metadata = {
-  title: "South African Web Developer | Josvil Digital",
-  description: "Professional web and app development services by a South African web developer. Specializing in modern, responsive websites and custom applications.",
-  keywords: [
-    "web developer",
-    "South Africa",
-    "app developer",
-    "web development",
-    "app development",
-    "React",
-    "Next.js",
-    "frontend",
-    "backend",
-    "software engineer",
-    "Josvil Digital"
-  ],
-  authors: [{ name: "Josvil Digital" }]
-};
 
 export default function Home() {
   const { isDarkMode } = useTheme();
@@ -253,7 +235,7 @@ export default function Home() {
                   { title: "UI/UX DESIGN", delay: 0 },
                   { title: "WEB DEVELOPMENT", delay: 0.1 },
                 { title: "APP DEVELOPMENT", delay: 0.2 }
-                ].map((service, index) => (
+                ].map((service) => (
                   <motion.div
                     key={service.title}
                     initial={{ opacity: 0, y: 50 }}

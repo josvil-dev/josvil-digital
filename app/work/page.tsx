@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
 import { 
-  Code, ExternalLink, Github, Globe, Star, Users, 
-  Calendar, Award, BookOpen, Zap, ArrowRight, Eye
+  Code, ExternalLink, Github, Star, Users, 
+  BookOpen, ArrowRight, Eye
 } from 'lucide-react';
 
 // Animation variants
@@ -436,7 +436,7 @@ export default function Work() {
             </motion.h1>
             <motion.p variants={fadeInUp} className={`${themeClasses.description} max-w-3xl mx-auto mb-12`}>
               Explore my journey through code, design, and innovation. From client projects to 
-              open-source contributions, here's a showcase of my passion for creating exceptional 
+              open-source contributions, here&apos;s a showcase of my passion for creating exceptional 
               digital experiences.
             </motion.p>
 

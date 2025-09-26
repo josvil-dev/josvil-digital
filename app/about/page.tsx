@@ -5,15 +5,15 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
 import { 
-  Mail, Phone, MapPin, Calendar, Briefcase, GraduationCap, 
-  Code, Palette, Database, Globe, Figma, Github, 
-  Server, Layers, Zap, Coffee, Star, Award 
+    Briefcase, 
+  Code, Palette, Globe,
+  Server, Layers, Zap, 
 } from 'lucide-react';
 import { 
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, 
   SiExpress, SiPostgresql, SiMongodb, SiFigma, SiAdobecreativecloud,
-  SiGit, SiDocker, SiAmazon, SiVercel, SiJavascript, SiPython,
-  SiFramer, SiNetlify, SiFirebase
+  SiGit, SiDocker, SiAmazon, SiVercel , SiPython,
+  SiFramer, SiFirebase
 } from 'react-icons/si';
 
 // Animation variants
@@ -191,20 +191,7 @@ export default function About() {
     }
   ];
 
-  const education = [
-    {
-      period: "2020 - 2022",
-      title: "Full-Stack Development",
-      institution: "Online Platforms & Self-taught",
-      description: "Comprehensive training in modern web technologies"
-    },
-    {
-      period: "2018 - 2020",
-      title: "Computer Science Fundamentals", 
-      institution: "Online Coursework",
-      description: "Core programming concepts and software engineering principles"
-    }
-  ];
+ 
 
   const techStack = [
     { 
@@ -327,7 +314,7 @@ export default function About() {
 
                 <div className="space-y-6">
                   <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-lg leading-relaxed`}>
-                    With over 7 years of experience, I've been crafting seamless digital experiences 
+                    With over 7 years of experience, I&aposve been crafting seamless digital experiences 
                     that users love and businesses rely on. My journey started with a curiosity about 
                     how things work on the web, and it evolved into a passion for creating meaningful 
                     digital solutions.
@@ -385,7 +372,7 @@ export default function About() {
                 <h2 className={themeClasses.subheading}>My Journey</h2>
               </div>
               <p className={`${themeClasses.description} max-w-2xl mx-auto`}>
-                From curious beginner to seasoned professional - here's how my career has evolved over the years
+                From curious beginner to seasoned professional - here&apos;s how my career has evolved over the years
               </p>
             </motion.div>
             
