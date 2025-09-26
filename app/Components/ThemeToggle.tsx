@@ -20,7 +20,7 @@ const ThemeToggle = () => {
   // Don't render until mounted to prevent hydration issues
   if (!mounted) {
     return (
-      <div className="fixed top-4 right-4 z-50 p-3 bg-slate-800/80 backdrop-blur-sm border border-white/10 rounded-full">
+      <div className="fixed bottom-6 right-6 z-50 p-3 bg-slate-800/80 backdrop-blur-sm border border-white/10 rounded-full">
         <FaSun size={20} className="text-white" />
       </div>
     );
@@ -29,7 +29,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={handleToggle}
-      className={`fixed top-4 right-4 z-[9999] p-3 backdrop-blur-sm border rounded-full transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 ${
+      className={`fixed bottom-6 right-6 z-[9999] p-3 backdrop-blur-sm border rounded-full transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 ${
         isDarkMode 
           ? 'bg-slate-800/90 border-white/20 text-white hover:bg-slate-700/90' 
           : 'bg-white/90 border-gray-300/60 text-gray-700 hover:bg-gray-50/90 shadow-lg'

@@ -30,7 +30,6 @@ const Navbar = () => {
                 ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-lg' 
                 : 'bg-transparent'),
         logo: isDarkMode ? 'text-white font-semibold text-xl hidden sm:block' : 'text-gray-900 font-semibold text-xl hidden sm:block',
-        navLink: isDarkMode ? 'relative text-white/80 hover:text-white transition-colors duration-300 font-medium group' : 'relative text-gray-600 hover:text-gray-900 transition-colors duration-300 font-medium group',
         ctaButton: isDarkMode ? 'inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)]' : 'inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-[0_10px_25px_rgba(99,102,241,0.3)]',
         mobileButton: isDarkMode ? 'md:hidden p-2 text-white bg-white/10 backdrop-blur-sm rounded-lg border border-white/10' : 'md:hidden p-2 text-gray-700 bg-gray-900/10 backdrop-blur-sm rounded-lg border border-gray-300/30',
         mobileMenu: isDarkMode ? 'md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/10' : 'md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200/50',
@@ -71,27 +70,60 @@ const Navbar = () => {
                         </Link>
                     </motion.div>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-8">
+                    {/* Desktop Navigation - Next to Logo */}
+                    <div className="hidden md:flex items-center gap-10 ml-8">
                         {navItems.map((item, index) => (
                             <motion.div
                                 key={item.name}
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="relative group"
                             >
                                 <Link
                                     href={item.href}
-                                    className={themeClasses.navLink}
+                                    className={`relative font-bold transition-colors duration-300 flex items-center gap-1 ${
+                                        isDarkMode 
+                                            ? 'text-white/90 hover:text-white' 
+                                            : 'text-gray-700 hover:text-gray-900'
+                                    }`}
                                 >
                                     {item.name}
-                                    <motion.div
-                                        className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"
-                                    />
+                                    <motion.svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                        initial={{ rotate: 0 }}
+                                        whileHover={{ rotate: 180 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </motion.svg>
                                 </Link>
+                                
+                                {/* Hover dot indicator */}
+                                <motion.div
+                                    className={`absolute -bottom-2 left-1/2 w-1 h-1 rounded-full ${
+                                        isDarkMode 
+                                            ? 'bg-gradient-to-r from-indigo-400 to-purple-400' 
+                                            : 'bg-gradient-to-r from-indigo-600 to-purple-600'
+                                    }`}
+                                    initial={{ scale: 0, x: '-50%' }}
+                                    whileHover={{ scale: 1 }}
+                                    transition={{ duration: 0.2 }}
+                                />
                             </motion.div>
                         ))}
-                        
+                    </div>
+
+                    {/* CTA Button - Right Side */}
+                    <div className="hidden md:flex items-center ml-auto">
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
