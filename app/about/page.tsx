@@ -312,7 +312,7 @@ export default function About() {
   return (
     <>
       {/* JSON-LD Structured Data */}
-      <JsonLd data={personSchema} />
+      <JsonLd data={personSchema as unknown as Record<string, unknown>} />
       <JsonLd data={organizationSchema} />
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={aboutPageSchema} />

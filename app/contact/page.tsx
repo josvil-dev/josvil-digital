@@ -512,19 +512,7 @@ export default function Contact() {
       <JsonLd data={faqSchema} />
 
       <div className={themeClasses.container}>
-      {/* JSON-LD Structured Data */}
-      <JsonLd
-        data={[
-          personSchema,
-          organizationSchema,
-          breadcrumbSchema,
-          contactPageSchema,
-          serviceAreaSchema,
-          faqSchema
-        ]}
-      />
-
-      {/* Hero Section */}
+        {/* Hero Section */}
       <section className={themeClasses.section}>
         <div className={themeClasses.gradient} />
         <div className={themeClasses.backgroundBlur1} />

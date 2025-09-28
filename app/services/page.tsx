@@ -12,7 +12,7 @@ import {
 } from '../../lib/jsonld';
 import { 
   Code, Palette, Briefcase, ArrowRight, Check,
-  Globe, Smartphone, Search, Zap
+  Globe, Smartphone
 } from 'lucide-react';
 
 // Animation variants

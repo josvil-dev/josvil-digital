@@ -1,4 +1,4 @@
-export interface PersonSchema {
+export interface PersonSchema extends Record<string, unknown> {
   "@context": string;
   "@type": string;
   name: string;
@@ -15,13 +15,13 @@ export interface PersonSchema {
   offers: ServiceSchema[];
 }
 
-export interface ServiceSchema {
+export interface ServiceSchema extends Record<string, unknown> {
   "@type": string;
   name: string;
   description: string;
 }
 
-export interface WebsiteSchema {
+export interface WebsiteSchema extends Record<string, unknown> {
   "@context": string;
   "@type": string;
   name: string;
@@ -38,7 +38,7 @@ export interface WebsiteSchema {
   };
 }
 
-export interface ProjectSchema {
+export interface ProjectSchema extends Record<string, unknown> {
   "@context": string;
   "@type": string;
   name: string;
