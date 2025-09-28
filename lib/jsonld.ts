@@ -165,6 +165,9 @@ export const createOrganizationSchema = () => ({
   "name": "Josvil Digital",
   "description": "Professional web development and digital solutions by Joshua Vilanculo",
   "url": "https://josvil.digital",
+  "image": "https://josvil.digital/josvil.jpg",
+  "telephone": "+27639533676",
+  "priceRange": "R450 per hour",
   "founder": {
     "@type": "Person",
     "name": "Joshua Vilanculo"
@@ -172,13 +175,15 @@ export const createOrganizationSchema = () => ({
   "foundingDate": "2019",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+258-XXX-XXX-XXX",
+    "telephone": "+27-XXX-XXX-XXXX",
     "contactType": "customer service",
     "email": "hello@josvil.digital"
   },
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "MZ"
+    "addressLocality": "Johannesburg, Pretoria, Midrand",
+    "addressRegion": "Gauteng",
+    "addressCountry": "ZA"
   }
 });
 
