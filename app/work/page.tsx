@@ -4,6 +4,12 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
+import JsonLd from '../Components/JsonLd';
+import { 
+  createPersonSchema, 
+  createBreadcrumbSchema,
+  createProjectSchema 
+} from '../../lib/jsonld';
 import { 
   Code, ExternalLink, Github, Star, Users, 
   BookOpen, ArrowRight, Eye
@@ -394,6 +400,154 @@ function WorkTabsLayout({ isDarkMode }: { isDarkMode: boolean }) {
 export default function Work() {
   const { isDarkMode } = useTheme();
 
+  // Create structured data
+  const personSchema = createPersonSchema();
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "https://josvil.digital" },
+    { name: "Work", url: "https://josvil.digital/work" }
+  ]);
+
+  const portfolioPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Joshua Vilanculo Portfolio - Web Development Projects",
+    "description": "Explore Joshua Vilanculo's portfolio of web development projects, case studies, and open source contributions. Showcasing expertise in React, Next.js, and modern web technologies.",
+    "url": "https://josvil.digital/work",
+    "author": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "about": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": 6,
+      "itemListElement": [
+        {
+          "@type": "CreativeWork",
+          "name": "E-Commerce Platform",
+          "description": "A modern, scalable e-commerce solution built with Next.js and Stripe integration",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Vilanculo"
+          },
+          "dateCreated": "2024",
+          "keywords": ["Next.js", "React", "Stripe", "E-commerce", "TypeScript"]
+        },
+        {
+          "@type": "CreativeWork", 
+          "name": "SaaS Dashboard",
+          "description": "Analytics dashboard for SaaS companies with real-time data visualization",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Vilanculo"
+          },
+          "dateCreated": "2024",
+          "keywords": ["React", "D3.js", "Node.js", "MongoDB", "Analytics"]
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Mobile Banking App", 
+          "description": "Secure mobile banking application with biometric authentication",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Vilanculo"
+          },
+          "dateCreated": "2023",
+          "keywords": ["React Native", "Firebase", "TypeScript", "Mobile", "Security"]
+        }
+      ]
+    },
+    "inLanguage": "en"
+  };
+
+  // Individual project schemas
+  const ecommerceProjectSchema = createProjectSchema({
+    name: "E-Commerce Platform",
+    description: "A modern, scalable e-commerce solution built with Next.js and Stripe integration",
+    url: "https://josvil.digital/work/ecommerce-platform",
+    technologies: ["Next.js", "React", "Stripe", "Tailwind CSS", "PostgreSQL"],
+    dateCreated: "2024-01-01",
+    image: "https://josvil.digital/projects/ecommerce.jpg"
+  });
+
+  const saasProjectSchema = createProjectSchema({
+    name: "SaaS Dashboard",
+    description: "Analytics dashboard for SaaS companies with real-time data visualization", 
+    url: "https://josvil.digital/work/saas-dashboard",
+    technologies: ["React", "D3.js", "Node.js", "MongoDB"],
+    dateCreated: "2024-02-01",
+    image: "https://josvil.digital/projects/saas.jpg"
+  });
+
+  const mobileAppSchema = createProjectSchema({
+    name: "Mobile Banking App",
+    description: "Secure mobile banking application with biometric authentication",
+    url: "https://josvil.digital/work/mobile-banking",
+    technologies: ["React Native", "Firebase", "TypeScript"],
+    dateCreated: "2023-11-01",
+    image: "https://josvil.digital/projects/banking.jpg"
+  });
+
+  const skillsSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Joshua Vilanculo",
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Professional Skill",
+        "competencyRequired": "React Development",
+        "description": "Expert level React.js development with 5+ years experience"
+      },
+      {
+        "@type": "EducationalOccupationalCredential", 
+        "credentialCategory": "Professional Skill",
+        "competencyRequired": "Next.js Development",
+        "description": "Advanced Next.js framework expertise for full-stack applications"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Professional Skill", 
+        "competencyRequired": "UI/UX Design",
+        "description": "User-centered design and modern interface development"
+      }
+    ]
+  };
+
+  const caseStudySchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Web Development Case Studies by Joshua Vilanculo",
+    "description": "Detailed case studies showing problem-solving approach and results in web development projects",
+    "author": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Josvil Digital"
+    },
+    "datePublished": "2024-01-01",
+    "articleSection": "Case Studies",
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "User Experience Design"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Performance Optimization"
+      },
+      {
+        "@type": "Thing",
+        "name": "Web Development"
+      }
+    ]
+  };
+
   // Theme-aware classes
   const themeClasses = {
     container: isDarkMode ? "min-h-screen bg-slate-900" : "min-h-screen bg-gray-50",
@@ -410,9 +564,20 @@ export default function Work() {
   };
 
   return (
-    <div className={themeClasses.container}>
-      {/* Hero Section */}
-      <section className={themeClasses.section}>
+    <>
+      {/* JSON-LD Structured Data */}
+      <JsonLd data={personSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={portfolioPageSchema} />
+      <JsonLd data={ecommerceProjectSchema} />
+      <JsonLd data={saasProjectSchema} />
+      <JsonLd data={mobileAppSchema} />
+      <JsonLd data={skillsSchema} />
+      <JsonLd data={caseStudySchema} />
+
+      <div className={themeClasses.container}>
+        {/* Hero Section */}
+        <section className={themeClasses.section}>
         <div className={themeClasses.gradient} />
         <div className={themeClasses.backgroundBlur1} />
         <div className={themeClasses.backgroundBlur2} />
@@ -479,5 +644,6 @@ export default function Work() {
         </div>
       </section>
     </div>
+    </>
   );
 }

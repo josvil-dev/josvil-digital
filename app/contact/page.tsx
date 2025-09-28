@@ -3,6 +3,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
+import JsonLd from '../Components/JsonLd';
+import { 
+  createPersonSchema, 
+  createBreadcrumbSchema,
+  createOrganizationSchema 
+} from '../../lib/jsonld';
 import { 
   Mail, Phone, MapPin, Send, Clock, User, MessageCircle, 
   CheckCircle, AlertCircle, Loader2, 
@@ -329,6 +335,109 @@ function ContactForm({ isDarkMode }: { isDarkMode: boolean }) {
 export default function Contact() {
   const { isDarkMode } = useTheme();
 
+  // Create structured data
+  const personSchema = createPersonSchema();
+  const organizationSchema = createOrganizationSchema();
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "https://josvil.digital" },
+    { name: "Contact", url: "https://josvil.digital/contact" }
+  ]);
+
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Joshua Vilanculo - Full Stack Developer",
+    "description": "Get in touch with Joshua Vilanculo for web development projects, UI/UX design services, or technical consulting. Available for freelance and contract work.",
+    "url": "https://josvil.digital/contact",
+    "author": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+258-XXX-XXX-XXX",
+          "contactType": "customer service",
+          "email": "hello@josvil.digital",
+          "availableLanguage": ["English", "Portuguese"],
+          "areaServed": "Global",
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        }
+      ],
+      "sameAs": [
+        "https://github.com/joshuavilanculo",
+        "https://linkedin.com/in/joshuavilanculo", 
+        "https://twitter.com/joshuavilanculo"
+      ]
+    },
+    "inLanguage": "en"
+  };
+
+  const serviceAreaSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Web Development & Design Services",
+    "description": "Professional web development, UI/UX design, and technical consulting services",
+    "provider": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "areaServed": {
+      "@type": "GeoShape",
+      "description": "Global - Remote services available worldwide"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://josvil.digital/contact",
+      "servicePhone": "+258-XXX-XXX-XXX",
+      "email": "hello@josvil.digital"
+    },
+    "offers": {
+      "@type": "Offer",
+      "description": "Custom web development and design solutions",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How quickly do you respond to inquiries?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I typically respond to all inquiries within 24 hours during business days. For urgent projects, I'm available for same-day consultation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of projects do you work on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I specialize in web development projects including e-commerce platforms, SaaS applications, portfolio websites, and mobile applications using React, Next.js, and modern web technologies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you work with international clients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, I work with clients globally and am experienced in remote collaboration. I'm available in multiple time zones and communicate fluently in English and Portuguese."
+        }
+      }
+    ]
+  };
+
   // Theme-aware classes
   const themeClasses = {
     container: isDarkMode ? "min-h-screen bg-slate-900" : "min-h-screen bg-gray-50",
@@ -393,7 +502,28 @@ export default function Contact() {
   ];
 
   return (
-    <div className={themeClasses.container}>
+    <>
+      {/* JSON-LD Structured Data */}
+      <JsonLd data={personSchema} />
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={contactPageSchema} />
+      <JsonLd data={serviceAreaSchema} />
+      <JsonLd data={faqSchema} />
+
+      <div className={themeClasses.container}>
+      {/* JSON-LD Structured Data */}
+      <JsonLd
+        data={[
+          personSchema,
+          organizationSchema,
+          breadcrumbSchema,
+          contactPageSchema,
+          serviceAreaSchema,
+          faqSchema
+        ]}
+      />
+
       {/* Hero Section */}
       <section className={themeClasses.section}>
         <div className={themeClasses.gradient} />
@@ -532,5 +662,6 @@ export default function Contact() {
         </div>
       </section>
     </div>
+    </>
   );
 }

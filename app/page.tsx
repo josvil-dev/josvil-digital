@@ -4,7 +4,14 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Hero from './Components/Hero';
 import SkillsBento from './Components/SkillsBento';
+import JsonLd from './Components/JsonLd';
 import { useTheme } from './contexts/ThemeContext';
+import { 
+  createPersonSchema, 
+  createWebsiteSchema, 
+  createOrganizationSchema,
+  createServiceSchema 
+} from '../lib/jsonld';
 
 
 // Animation variants
@@ -26,6 +33,37 @@ const staggerContainer = {
 
 export default function Home() {
   const { isDarkMode } = useTheme();
+
+  // Create structured data
+  const personSchema = createPersonSchema();
+  const websiteSchema = createWebsiteSchema();
+  const organizationSchema = createOrganizationSchema();
+  const serviceSchema = createServiceSchema();
+  
+  const portfolioSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Joshua Vilanculo Portfolio",
+    "description": "A collection of web development projects showcasing expertise in React, Next.js, and modern web technologies.",
+    "url": "https://josvil.digital",
+    "author": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "creator": {
+      "@type": "Person", 
+      "name": "Joshua Vilanculo"
+    },
+    "about": [
+      "Web Development",
+      "React Development", 
+      "Next.js Applications",
+      "UI/UX Design",
+      "Full Stack Development"
+    ],
+    "dateCreated": "2019",
+    "inLanguage": "en"
+  };
 
   // Theme-aware classes
   const themeClasses = {
@@ -52,6 +90,13 @@ export default function Home() {
 
   return (
     <>
+      {/* JSON-LD Structured Data */}
+      <JsonLd data={personSchema} />
+      <JsonLd data={websiteSchema} />
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={portfolioSchema} />
+
       <div className={themeClasses.container}>
         <Hero />
         

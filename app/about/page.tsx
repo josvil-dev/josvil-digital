@@ -4,15 +4,21 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
+import JsonLd from '../Components/JsonLd';
 import { 
-    Briefcase, 
+  createPersonSchema, 
+  createBreadcrumbSchema,
+  createOrganizationSchema 
+} from '../../lib/jsonld';
+import {
+  Briefcase,
   Code, Palette, Globe,
-  Server, Layers, Zap, 
+  Server, Layers, Zap,
 } from 'lucide-react';
-import { 
-  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, 
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs,
   SiExpress, SiPostgresql, SiMongodb, SiFigma, SiAdobecreativecloud,
-  SiGit, SiDocker, SiAmazon, SiVercel , SiPython,
+  SiGit, SiDocker, SiAmazon, SiVercel, SiPython,
   SiFramer, SiFirebase
 } from 'react-icons/si';
 
@@ -50,7 +56,7 @@ function ServicesTabLayout({ isDarkMode }: { isDarkMode: boolean }) {
       ]
     },
     {
-      title: "UI/UX Design", 
+      title: "UI/UX Design",
       icon: <Palette className="w-6 h-6" />,
       description: "User-centered design solutions that enhance digital experiences",
       features: [
@@ -85,15 +91,14 @@ function ServicesTabLayout({ isDarkMode }: { isDarkMode: boolean }) {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-              activeTab === index
-                ? isDarkMode 
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${activeTab === index
+                ? isDarkMode
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
                   : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
                 : isDarkMode
                   ? 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
-            }`}
+              }`}
           >
             {services[index].icon}
             {service.title}
@@ -125,11 +130,10 @@ function ServicesTabLayout({ isDarkMode }: { isDarkMode: boolean }) {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className={`flex items-start gap-3 p-4 rounded-lg ${
-                isDarkMode 
-                  ? 'bg-white/5 border border-white/10' 
+              className={`flex items-start gap-3 p-4 rounded-lg ${isDarkMode
+                  ? 'bg-white/5 border border-white/10'
                   : 'bg-gray-50 border border-gray-200'
-              }`}
+                }`}
             >
               <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 mt-2 flex-shrink-0" />
               <span className={`${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -145,6 +149,75 @@ function ServicesTabLayout({ isDarkMode }: { isDarkMode: boolean }) {
 
 export default function About() {
   const { isDarkMode } = useTheme();
+
+  // Create structured data
+  const personSchema = createPersonSchema();
+  const organizationSchema = createOrganizationSchema();
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "https://josvil.digital" },
+    { name: "About", url: "https://josvil.digital/about" }
+  ]);
+
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Joshua Vilanculo - Full Stack Developer",
+    "description": "Learn about Joshua Vilanculo, a passionate full stack developer and UI/UX designer with over 7 years of experience in creating exceptional digital experiences.",
+    "url": "https://josvil.digital/about",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo",
+      "jobTitle": "Full Stack Developer & UI/UX Designer",
+      "description": "Experienced developer specializing in React, Next.js, and modern web technologies",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Josvil Digital"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Full Stack Developer",
+        "occupationLocation": {
+          "@type": "Country",
+          "name": "Mozambique"
+        },
+        "skills": [
+          "React", "Next.js", "TypeScript", "Node.js", "UI/UX Design", 
+          "JavaScript", "PostgreSQL", "MongoDB", "Tailwind CSS"
+        ]
+      }
+    },
+    "author": {
+      "@type": "Person", 
+      "name": "Joshua Vilanculo"
+    },
+    "inLanguage": "en"
+  };
+
+  const professionalServiceSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Full Stack Development & UI/UX Design Services",
+    "description": "Professional web development, UI/UX design, and consulting services by Joshua Vilanculo",
+    "provider": {
+      "@type": "Person",
+      "name": "Joshua Vilanculo"
+    },
+    "serviceType": [
+      "Web Development",
+      "UI/UX Design", 
+      "Frontend Development",
+      "Backend Development",
+      "Mobile App Development",
+      "Technical Consulting"
+    ],
+    "areaServed": "Global",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://josvil.digital/contact",
+      "servicePhone": "+258-XXX-XXX-XXX",
+      "email": "hello@josvil.digital"
+    }
+  };
 
   // Theme-aware classes
   const themeClasses = {
@@ -167,7 +240,7 @@ export default function About() {
   const experience = [
     {
       period: "2023 - Present",
-      title: "Senior Full-Stack Developer & UI/UX Designer", 
+      title: "Senior Full-Stack Developer & UI/UX Designer",
       company: "Freelance & Consulting",
       description: "Leading end-to-end development of modern web applications, specializing in React, Next.js, and comprehensive design systems. Managing multiple client projects with focus on user experience and scalable architecture."
     },
@@ -180,7 +253,7 @@ export default function About() {
     {
       period: "2019 - 2021",
       title: "Frontend Developer & Designer",
-      company: "Startup Environment", 
+      company: "Startup Environment",
       description: "Built interactive user interfaces and mobile-responsive websites. Gained expertise in modern JavaScript frameworks while contributing to product design and user research initiatives."
     },
     {
@@ -191,11 +264,9 @@ export default function About() {
     }
   ];
 
- 
-
   const techStack = [
-    { 
-      category: "Frontend", 
+    {
+      category: "Frontend",
       icon: <Code className="w-6 h-6" />,
       tools: [
         { name: "React", icon: <SiReact className="w-5 h-5 text-blue-500" /> },
@@ -205,8 +276,8 @@ export default function About() {
         { name: "Framer Motion", icon: <SiFramer className="w-5 h-5 text-pink-500" /> }
       ]
     },
-    { 
-      category: "Backend", 
+    {
+      category: "Backend",
       icon: <Server className="w-6 h-6" />,
       tools: [
         { name: "Node.js", icon: <SiNodedotjs className="w-5 h-5 text-green-600" /> },
@@ -216,8 +287,8 @@ export default function About() {
         { name: "Python", icon: <SiPython className="w-5 h-5 text-yellow-500" /> }
       ]
     },
-    { 
-      category: "Design", 
+    {
+      category: "Design",
       icon: <Palette className="w-6 h-6" />,
       tools: [
         { name: "Figma", icon: <SiFigma className="w-5 h-5 text-purple-500" /> },
@@ -225,8 +296,8 @@ export default function About() {
         { name: "UI/UX Design", icon: <Layers className="w-5 h-5 text-indigo-500" /> }
       ]
     },
-    { 
-      category: "Tools", 
+    {
+      category: "Tools",
       icon: <Zap className="w-6 h-6" />,
       tools: [
         { name: "Git", icon: <SiGit className="w-5 h-5 text-orange-600" /> },
@@ -239,351 +310,350 @@ export default function About() {
   ];
 
   return (
-    <div className={themeClasses.container}>
-      {/* Hero Section */}
-      <section className={themeClasses.section}>
-        <div className={themeClasses.gradient} />
-        <div className={themeClasses.backgroundBlur1} />
-        <div className={themeClasses.backgroundBlur2} />
+    <>
+      {/* JSON-LD Structured Data */}
+      <JsonLd data={personSchema} />
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={aboutPageSchema} />
+      <JsonLd data={professionalServiceSchema} />
 
-        <div className="relative max-w-7xl mx-auto px-6 md:px-10">
-          {/* Hero Section */}
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="text-center mb-20"
-          >
-            <motion.span variants={fadeInUp} className={themeClasses.sectionLabel}>
-              About Joshua
-            </motion.span>
-            <motion.h1 variants={fadeInUp} className={themeClasses.heading}>
-              <span className={themeClasses.gradientText}>Creative Developer</span>
-              <br />
-              & Digital Designer
-            </motion.h1>
-          </motion.div>
+      <div className={themeClasses.container}>
+        {/* Hero Section */}
+        <section className={themeClasses.section}>
+          <div className={themeClasses.gradient} />
+          <div className={themeClasses.backgroundBlur1} />
+          <div className={themeClasses.backgroundBlur2} />
 
-          {/* Intro Section with Image */}
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="mb-20 relative"
-          >
-            {/* Background decoration elements */}
-            <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-10 left-10 w-40 h-40 bg-gradient-to-tr from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl" />
-            
-            <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
-              {/* Image */}
-              <motion.div 
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02, rotate: 2 }}
-                className="relative"
-              >
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="/josvil.jpg"
-                    alt="Joshua Vilanculo"
-                    width={500}
-                    height={600}
-                    className="w-full h-auto object-cover"
-                  />
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                </div>
-                {/* Floating decoration */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-indigo-500/30 to-purple-500/30 rounded-full blur-2xl" />
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-tr from-cyan-500/30 to-blue-500/30 rounded-full blur-3xl" />
-              </motion.div>
-
-              {/* Content */}
-              <motion.div variants={fadeInUp} className="space-y-8">
-                <div>
-                  <h2 className={`text-3xl lg:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
-                    Hey, I&apos;m Joshua! 👋
-                  </h2>
-                  <p className={`${themeClasses.description} text-xl leading-relaxed mb-6`}>
-                    Welcome to the intersection of design and technology, where creativity and 
-                    functionality come together.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-lg leading-relaxed`}>
-                    With over 7 years of experience, I&aposve been crafting seamless digital experiences 
-                    that users love and businesses rely on. My journey started with a curiosity about 
-                    how things work on the web, and it evolved into a passion for creating meaningful 
-                    digital solutions.
-                  </p>
-                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-lg leading-relaxed`}>
-                    I specialize in bridging the gap between design and development, ensuring that 
-                    every pixel serves a purpose and every interaction feels intuitive. From concept 
-                    to deployment, I&apos;m committed to delivering exceptional results.
-                  </p>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-8 pt-8">
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center"
-                  >
-                    <div className={`text-3xl font-bold ${themeClasses.gradientText} mb-2`}>7+</div>
-                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Experience</div>
-                  </motion.div>
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center"
-                  >
-                    <div className={`text-3xl font-bold ${themeClasses.gradientText} mb-2`}>50+</div>
-                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects Completed</div>
-                  </motion.div>
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center"
-                  >
-                    <div className={`text-3xl font-bold ${themeClasses.gradientText} mb-2`}>100%</div>
-                    <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Client Satisfaction</div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Experience Section - Modern Design */}
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="mb-20 relative"
-          >
-            {/* Background decorations */}
-            <div className="absolute top-0 right-20 w-40 h-40 bg-gradient-to-bl from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-20 w-48 h-48 bg-gradient-to-tr from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl" />
-            
-            <motion.div variants={fadeInUp} className="text-center mb-16 relative z-10">
-              <div className="inline-flex items-center gap-3 mb-4">
-                <Briefcase className="text-indigo-400" size={32} />
-                <h2 className={themeClasses.subheading}>My Journey</h2>
-              </div>
-              <p className={`${themeClasses.description} max-w-2xl mx-auto`}>
-                From curious beginner to seasoned professional - here&apos;s how my career has evolved over the years
-              </p>
+          <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+            {/* Hero Section */}
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="text-center mb-20"
+            >
+              <motion.span variants={fadeInUp} className={themeClasses.sectionLabel}>
+                About Joshua
+              </motion.span>
+              <motion.h1 variants={fadeInUp} className={themeClasses.heading}>
+                <span className={themeClasses.gradientText}>Creative Developer</span>
+                <br />
+                & Digital Designer
+              </motion.h1>
             </motion.div>
-            
-            {/* Modern Experience Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-              {experience.map((exp, index) => (
-                <motion.div 
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative"
-                >
-                  {/* Card */}
-                  <div className={`relative overflow-hidden rounded-2xl p-6 h-full ${
-                    isDarkMode 
-                      ? 'bg-gradient-to-br from-slate-800/60 to-slate-700/40 border border-white/10 backdrop-blur-sm' 
-                      : 'bg-gradient-to-br from-white/80 to-gray-50/60 border border-gray-200/50 backdrop-blur-sm shadow-lg'
-                  } transition-all duration-300 group-hover:border-indigo-400/50`}>
-                    
-                    {/* Year Badge */}
-                    <div className="absolute top-4 right-4">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                        isDarkMode ? 'bg-indigo-500/20' : 'bg-indigo-100'
-                      }`}>
-                        <span className={`text-xs font-bold ${
-                          isDarkMode ? 'text-indigo-300' : 'text-indigo-700'
-                        }`}>
-                          {exp.period.split(' - ')[0].slice(-2)}
-                        </span>
-                      </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="space-y-4">
-                      {/* Period */}
-                      <div className="inline-block">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          isDarkMode ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300' : 'bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700'
-                        }`}>
-                          {exp.period}
-                        </span>
+            {/* Intro Section with Image */}
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="mb-20 relative"
+            >
+              {/* Background decoration elements */}
+              <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-10 left-10 w-40 h-40 bg-gradient-to-tr from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl" />
+
+              <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                {/* Image */}
+                <motion.div
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.02, rotate: 2 }}
+                  className="relative"
+                >
+                  <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/josvil.jpg"
+                      alt="Joshua Vilanculo"
+                      width={500}
+                      height={600}
+                      className="w-full h-auto object-cover"
+                    />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                  {/* Floating decoration */}
+                  <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-indigo-500/30 to-purple-500/30 rounded-full blur-2xl" />
+                  <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-tr from-cyan-500/30 to-blue-500/30 rounded-full blur-3xl" />
+                </motion.div>
+
+                {/* Content */}
+                <motion.div variants={fadeInUp} className="space-y-8">
+                  <div>
+                    <h2 className={`text-3xl lg:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
+                      Hey, I&apos;m Joshua! 👋
+                    </h2>
+                    <p className={`${themeClasses.description} text-xl leading-relaxed mb-6`}>
+                      Welcome to the intersection of design and technology, where creativity and
+                      functionality come together.
+                    </p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-lg leading-relaxed`}>
+                      With over 7 years of experience, I&apos;ve been crafting seamless digital experiences
+                      that users love and businesses rely on. My journey started with a curiosity about
+                      how things work on the web, and it evolved into a passion for creating meaningful
+                      digital solutions.
+                    </p>
+                    <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-lg leading-relaxed`}>
+                      I specialize in bridging the gap between design and development, ensuring that
+                      every pixel serves a purpose and every interaction feels intuitive. From concept
+                      to deployment, I&apos;m committed to delivering exceptional results.
+                    </p>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-8 pt-8">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="text-center"
+                    >
+                      <div className={`text-3xl font-bold ${themeClasses.gradientText} mb-2`}>7+</div>
+                      <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Experience</div>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="text-center"
+                    >
+                      <div className={`text-3xl font-bold ${themeClasses.gradientText} mb-2`}>50+</div>
+                      <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects Completed</div>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="text-center"
+                    >
+                      <div className={`text-3xl font-bold ${themeClasses.gradientText} mb-2`}>100%</div>
+                      <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Client Satisfaction</div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Experience Section - Modern Design */}
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="mb-20 relative"
+            >
+              {/* Background decorations */}
+              <div className="absolute top-0 right-20 w-40 h-40 bg-gradient-to-bl from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-20 w-48 h-48 bg-gradient-to-tr from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl" />
+
+              <motion.div variants={fadeInUp} className="text-center mb-16 relative z-10">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <Briefcase className="text-indigo-400" size={32} />
+                  <h2 className={themeClasses.subheading}>My Journey</h2>
+                </div>
+                <p className={`${themeClasses.description} max-w-2xl mx-auto`}>
+                  From curious beginner to seasoned professional - here&apos;s how my career has evolved over the years
+                </p>
+              </motion.div>
+
+              {/* Modern Experience Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                {experience.map((exp, index) => (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group relative"
+                  >
+                    {/* Card */}
+                    <div className={`relative overflow-hidden rounded-2xl p-6 h-full ${isDarkMode
+                        ? 'bg-gradient-to-br from-slate-800/60 to-slate-700/40 border border-white/10 backdrop-blur-sm'
+                        : 'bg-gradient-to-br from-white/80 to-gray-50/60 border border-gray-200/50 backdrop-blur-sm shadow-lg'
+                      } transition-all duration-300 group-hover:border-indigo-400/50`}>
+
+                      {/* Year Badge */}
+                      <div className="absolute top-4 right-4">
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isDarkMode ? 'bg-indigo-500/20' : 'bg-indigo-100'
+                          }`}>
+                          <span className={`text-xs font-bold ${isDarkMode ? 'text-indigo-300' : 'text-indigo-700'
+                            }`}>
+                            {exp.period.split(' - ')[0].slice(-2)}
+                          </span>
+                        </div>
                       </div>
-                      
-                      {/* Title */}
-                      <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} leading-tight group-hover:text-indigo-400 transition-colors duration-300`}>
-                        {exp.title}
-                      </h3>
-                      
-                      {/* Company */}
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-                        <p className={`text-sm font-medium ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
-                          {exp.company}
+
+                      {/* Content */}
+                      <div className="space-y-4">
+                        {/* Period */}
+                        <div className="inline-block">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${isDarkMode ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300' : 'bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700'
+                            }`}>
+                            {exp.period}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} leading-tight group-hover:text-indigo-400 transition-colors duration-300`}>
+                          {exp.title}
+                        </h3>
+
+                        {/* Company */}
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                          <p className={`text-sm font-medium ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
+                            {exp.company}
+                          </p>
+                        </div>
+
+                        {/* Description */}
+                        <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
+                          {exp.description}
                         </p>
                       </div>
-                      
-                      {/* Description */}
-                      <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
-                        {exp.description}
-                      </p>
+
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+
+                      {/* Progress indicator */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl"></div>
                     </div>
 
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                    
-                    {/* Progress indicator */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl"></div>
-                  </div>
-
-                  {/* Floating elements */}
-                  <div className={`absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                  <div className={`absolute -bottom-2 -left-2 w-3 h-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Experience Stats */}
-            <motion.div 
-              variants={fadeInUp}
-              className="mt-16 text-center"
-            >
-              <div className="inline-flex items-center gap-8 px-8 py-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <div>
-                  <div className={`text-2xl font-bold ${themeClasses.gradientText}`}>4</div>
-                  <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Career Stages</div>
-                </div>
-                <div className={`w-px h-8 ${isDarkMode ? 'bg-white/20' : 'bg-gray-300'}`}></div>
-                <div>
-                  <div className={`text-2xl font-bold ${themeClasses.gradientText}`}>7+</div>
-                  <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Growth</div>
-                </div>
-                <div className={`w-px h-8 ${isDarkMode ? 'bg-white/20' : 'bg-gray-300'}`}></div>
-                <div>
-                  <div className={`text-2xl font-bold ${themeClasses.gradientText}`}>∞</div>
-                  <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Learning</div>
-                </div>
+                    {/* Floating elements */}
+                    <div className={`absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                    <div className={`absolute -bottom-2 -left-2 w-3 h-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  </motion.div>
+                ))}
               </div>
-            </motion.div>
-          </motion.div>
 
-          {/* Services Section */}
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="mb-20"
-          >
-            <motion.div variants={fadeInUp} className={themeClasses.card}>
-              <div className="flex items-center gap-3 mb-8">
-                <Server className="text-indigo-400" size={32} />
-                <h2 className={themeClasses.subheading}>Services</h2>
-              </div>
-              
-              <ServicesTabLayout isDarkMode={isDarkMode} />
-            </motion.div>
-          </motion.div>
-
-          {/* Tools & Technologies Bento Grid */}
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="mb-20"
-          >
-            <motion.div variants={fadeInUp} className="text-center mb-12">
-              <h2 className={themeClasses.subheading}>Tools & Technologies</h2>
-              <p className={`${themeClasses.description} max-w-2xl mx-auto`}>
-                A comprehensive toolkit for creating exceptional digital experiences
-              </p>
-            </motion.div>
-
-            {/* Bento Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-              {techStack.map((stack, index) => (
-                <motion.div 
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.02, rotate: Math.random() > 0.5 ? 1 : -1 }}
-                  className={`${themeClasses.card} relative overflow-hidden group ${
-                    index === 0 ? 'md:col-span-2 md:row-span-2' : 
-                    index === 1 ? 'lg:col-span-2' : ''
-                  }`}
-                >
-                  {/* Dynamic Overlay Shapes */}
-                  <div className={`absolute ${
-                    index % 2 === 0 ? 'top-0 right-0' : 'bottom-0 left-0'
-                  } w-24 h-24 ${
-                    index === 0 ? 'bg-gradient-to-bl from-indigo-500/20 to-purple-500/20' :
-                    index === 1 ? 'bg-gradient-to-tr from-purple-500/20 to-pink-500/20' :
-                    index === 2 ? 'bg-gradient-to-bl from-cyan-500/20 to-blue-500/20' :
-                    'bg-gradient-to-tr from-emerald-500/20 to-green-500/20'
-                  } rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-300`} />
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="text-indigo-400 group-hover:scale-110 transition-transform duration-300">
-                        {stack.icon}
-                      </div>
-                      <h3 className={`font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} ${
-                        index === 0 ? 'text-2xl' : 'text-lg'
-                      }`}>
-                        {stack.category}
-                      </h3>
-                    </div>
-                    
-                    <div className={`grid ${index === 0 ? 'grid-cols-3 gap-3' : 'grid-cols-2 gap-2'}`}>
-                      {stack.tools.slice(0, index === 0 ? 6 : 4).map((tool, toolIndex) => (
-                        <motion.div
-                          key={toolIndex}
-                          whileHover={{ scale: 1.1 }}
-                          className={`flex items-center gap-2 p-2 rounded-lg ${
-                            isDarkMode 
-                              ? 'bg-white/5 hover:bg-white/10 border border-white/10' 
-                              : 'bg-gray-100/80 hover:bg-gray-200/80 border border-gray-200/30'
-                          } transition-all duration-200`}
-                        >
-                          {tool.icon}
-                          <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} ${
-                            index === 0 ? 'hidden sm:inline' : ''
-                          }`}>
-                            {tool.name}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <motion.div 
-              variants={fadeInUp}
-              className="text-center"
-            >
+              {/* Experience Stats */}
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                variants={fadeInUp}
+                className="mt-16 text-center"
               >
-                <Link href="/work" className={`${themeClasses.button} text-lg px-8 py-4`}>
-                  <Globe className="w-5 h-5" />
-                  View My Work
-                </Link>
+                <div className="inline-flex items-center gap-8 px-8 py-4 rounded-2xl backdrop-blur-sm border border-white/10">
+                  <div>
+                    <div className={`text-2xl font-bold ${themeClasses.gradientText}`}>4</div>
+                    <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Career Stages</div>
+                  </div>
+                  <div className={`w-px h-8 ${isDarkMode ? 'bg-white/20' : 'bg-gray-300'}`}></div>
+                  <div>
+                    <div className={`text-2xl font-bold ${themeClasses.gradientText}`}>7+</div>
+                    <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Growth</div>
+                  </div>
+                  <div className={`w-px h-8 ${isDarkMode ? 'bg-white/20' : 'bg-gray-300'}`}></div>
+                  <div>
+                    <div className={`text-2xl font-bold ${themeClasses.gradientText}`}>∞</div>
+                    <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Learning</div>
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
-          </motion.div>
 
-        </div>
-      </section>
-    </div>
+            {/* Services Section */}
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <motion.div variants={fadeInUp} className={themeClasses.card}>
+                <div className="flex items-center gap-3 mb-8">
+                  <Server className="text-indigo-400" size={32} />
+                  <h2 className={themeClasses.subheading}>Services</h2>
+                </div>
+
+                <ServicesTabLayout isDarkMode={isDarkMode} />
+              </motion.div>
+            </motion.div>
+
+            {/* Tools & Technologies Bento Grid */}
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <motion.div variants={fadeInUp} className="text-center mb-12">
+                <h2 className={themeClasses.subheading}>Tools & Technologies</h2>
+                <p className={`${themeClasses.description} max-w-2xl mx-auto`}>
+                  A comprehensive toolkit for creating exceptional digital experiences
+                </p>
+              </motion.div>
+
+              {/* Bento Grid Layout */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                {techStack.map((stack, index) => (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.02, rotate: Math.random() > 0.5 ? 1 : -1 }}
+                    className={`${themeClasses.card} relative overflow-hidden group ${index === 0 ? 'md:col-span-2 md:row-span-2' :
+                        index === 1 ? 'lg:col-span-2' : ''
+                      }`}
+                  >
+                    {/* Dynamic Overlay Shapes */}
+                    <div className={`absolute ${index % 2 === 0 ? 'top-0 right-0' : 'bottom-0 left-0'
+                      } w-24 h-24 ${index === 0 ? 'bg-gradient-to-bl from-indigo-500/20 to-purple-500/20' :
+                        index === 1 ? 'bg-gradient-to-tr from-purple-500/20 to-pink-500/20' :
+                          index === 2 ? 'bg-gradient-to-bl from-cyan-500/20 to-blue-500/20' :
+                            'bg-gradient-to-tr from-emerald-500/20 to-green-500/20'
+                      } rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-300`} />
+
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="text-indigo-400 group-hover:scale-110 transition-transform duration-300">
+                          {stack.icon}
+                        </div>
+                        <h3 className={`font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} ${index === 0 ? 'text-2xl' : 'text-lg'
+                          }`}>
+                          {stack.category}
+                        </h3>
+                      </div>
+
+                      <div className={`grid ${index === 0 ? 'grid-cols-3 gap-3' : 'grid-cols-2 gap-2'}`}>
+                        {stack.tools.slice(0, index === 0 ? 6 : 4).map((tool, toolIndex) => (
+                          <motion.div
+                            key={toolIndex}
+                            whileHover={{ scale: 1.1 }}
+                            className={`flex items-center gap-2 p-2 rounded-lg ${isDarkMode
+                                ? 'bg-white/5 hover:bg-white/10 border border-white/10'
+                                : 'bg-gray-100/80 hover:bg-gray-200/80 border border-gray-200/30'
+                              } transition-all duration-200`}
+                          >
+                            {tool.icon}
+                            <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} ${index === 0 ? 'hidden sm:inline' : ''
+                              }`}>
+                              {tool.name}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <motion.div
+                variants={fadeInUp}
+                className="text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/work" className={`${themeClasses.button} text-lg px-8 py-4`}>
+                    <Globe className="w-5 h-5" />
+                    View My Work
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
