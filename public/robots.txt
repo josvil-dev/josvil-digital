@@ -1,84 +1,49 @@
 # Robots.txt for josvil.digital
-# Generated on September 26, 2025
+# Joshua Vilanculo - Full Stack Developer Portfolio
 
 # Allow all web crawlers to access the site
 User-agent: *
-
-# Allow crawling of main pages
 Allow: /
-Allow: /about
-Allow: /work
-Allow: /contact
 
-# Disallow admin and private areas
+# Disallow crawling of admin and private areas
 Disallow: /admin/
 Disallow: /api/
-Disallow: /data/
-
-# Disallow common WordPress/CMS paths (security)
-Disallow: /wp-admin/
-Disallow: /wp-includes/
-Disallow: /wp-content/
-Disallow: /administrator/
-Disallow: /login/
-Disallow: /dashboard/
-
-# Disallow development and system files
 Disallow: /_next/
-Disallow: /.next/
-Disallow: /node_modules/
-Disallow: /.git/
-Disallow: /.env
-Disallow: /package.json
-Disallow: /package-lock.json
+Disallow: /dashboard/
+Disallow: /private/
+Disallow: /*.json$
 
-# Allow static assets
-Allow: /favicon.ico
-Allow: /robots.txt
-Allow: /sitemap.xml
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.png$
-Allow: /*.gif$
-Allow: /*.svg$
-Allow: /*.webp$
-Allow: /*.css$
-Allow: /*.js$
-
-# Crawl delay for respectful crawling
-Crawl-delay: 1
+# Allow specific important pages
+Allow: /about
+Allow: /work
+Allow: /services
+Allow: /contact
 
 # Sitemap location
 Sitemap: https://josvil.digital/sitemap.xml
 
-# Specific instructions for major search engines
-User-agent: Googlebot
-Disallow: /admin/
-Disallow: /api/
+# Crawl delay (optional - helps with server load)
 Crawl-delay: 1
+
+# Specific rules for different bots
+User-agent: Googlebot
+Allow: /
 
 User-agent: Bingbot
-Disallow: /admin/
-Disallow: /api/
-Crawl-delay: 1
+Allow: /
 
-User-agent: Slurp
-Disallow: /admin/
-Disallow: /api/
-Crawl-delay: 2
+User-agent: facebookexternalhit
+Allow: /
 
-# Block bad bots and scrapers
+# Block aggressive crawlers that don't respect rate limits
 User-agent: AhrefsBot
-Disallow: /
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
 
 User-agent: MJ12bot
 Disallow: /
 
 User-agent: DotBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: SemrushBot-SA
 Disallow: /
