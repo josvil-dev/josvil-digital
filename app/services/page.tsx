@@ -95,9 +95,8 @@ export default function Services() {
     }
   };
 
-    // Import missing icon
-    // (Removed duplicate Monitor declaration)
-    
+  
+
         const services = [
           {
             icon: <Code className="w-8 h-8" />,
@@ -139,16 +138,7 @@ export default function Services() {
             color: "from-purple-500 to-pink-500",
             textColor: "text-purple-400"
           },
-          {
-            icon: <Monitor className="w-8 h-8" />,
-            title: "Frontend Development",
-            description: "Beautiful, responsive user interfaces that engage your audience",
-            features: ["React Applications", "Modern CSS", "Performance Optimization", "Accessibility"],
-            price: "From R18,000",
-            href: "/services/frontend",
-            color: "from-cyan-500 to-blue-500",
-            textColor: "text-cyan-400"
-          },
+      
           {
             icon: <Server className="w-8 h-8" />,
             title: "Backend Development",
