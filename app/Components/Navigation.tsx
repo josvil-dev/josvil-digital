@@ -309,9 +309,12 @@ const Footer = () => {
         ],
         'Services': [
             { name: 'Web Development', href: '/services/web-development' },
-            { name: 'UI/UX Design', href: '/services/design' },
-            { name: 'API Development', href: '/services/api' },
-            { name: 'Backend Systems', href: '/services/backend' },
+            { name: 'API Development', href: '/services/api-development' },
+            { name: 'WordPress', href: '/services/wordpress' },
+            { name: 'Framer', href: '/services/framer' },
+            { name: 'Frontend', href: '/services/frontend' },
+            { name: 'Backend', href: '/services/backend' },
+            { name: 'Figma Design', href: '/services/figma-design' },
         ],
     };
 
