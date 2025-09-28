@@ -9,6 +9,8 @@ export interface PersonSchema extends Record<string, unknown> {
   sameAs: string[];
   address: {
     "@type": string;
+    addressLocality?: string;
+    addressRegion?: string;
     addressCountry: string;
   };
   knowsAbout: string[];
@@ -68,7 +70,9 @@ export const createPersonSchema = (): PersonSchema => ({
   ],
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "MZ"
+    "addressLocality": "Johannesburg, Pretoria, Midrand",
+    "addressRegion": "Gauteng",
+    "addressCountry": "ZA"
   },
   "knowsAbout": [
     "JavaScript",
