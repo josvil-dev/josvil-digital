@@ -10,7 +10,7 @@ import {
   createOrganizationSchema 
 } from '../../../lib/jsonld';
 import { 
-  Server, Database, Cloud, Lock, Zap, Globe,
+  Server, Database, Cloud, Lock, Zap,
   ArrowRight, Check, ExternalLink, Code2
 } from 'lucide-react';
 
