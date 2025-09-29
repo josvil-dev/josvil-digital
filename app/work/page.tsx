@@ -1,7 +1,7 @@
 
 'use client';
 import React from 'react';
-import Image from 'next/image';
+
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
@@ -11,10 +11,7 @@ import {
   createBreadcrumbSchema,
   createProjectSchema 
 } from '../../lib/jsonld';
-import { 
-  Code, ExternalLink, Github, Star, Users, 
-  BookOpen, ArrowRight, Eye, Wrench
-} from 'lucide-react'; // Added Wrench icon for maintenance
+
 
 // Animation variants
 const fadeInUp = {
