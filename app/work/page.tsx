@@ -46,7 +46,7 @@ function WorkTabsLayout({ isDarkMode }: { isDarkMode: boolean }) {
         Work Section Under Maintenance 🛠️
       </h2>
       <p className={`max-w-xl ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-lg`}>
-        I'm currently revamping my portfolio to showcase new, exciting projects and an improved structure. 
+        I&aposm currently revamping my portfolio to showcase new, exciting projects and an improved structure. 
         Please check back soon to see the updates! In the meantime, feel free to connect or view my code on 
         <Link 
           href="https://github.com/example" 
