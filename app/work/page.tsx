@@ -1,7 +1,6 @@
 
 'use client';
 import React from 'react';
-
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
@@ -41,7 +40,7 @@ function WorkTabsLayout({ isDarkMode }: { isDarkMode: boolean }) {
       transition={{ duration: 0.5 }}
       className="flex flex-col items-center justify-center p-12 text-center"
     >
-      <Wrench className="w-16 h-16 text-yellow-500 mb-6 animate-pulse" />
+    
       <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
         Work Section Under Maintenance 🛠️
       </h2>
