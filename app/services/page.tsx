@@ -14,7 +14,7 @@ import {
     Code, Server, Globe, Figma,
     ArrowRight, Check, ExternalLink, Zap, Users,
 } from 'lucide-react';
-import { FaWordpress } from 'react-icons/fa';
+import servicesData from '../../data/services.json';
 
 // Animation variants
 const fadeInUp = {
@@ -97,99 +97,24 @@ export default function Services() {
 
   
 
-        const services = [
-          {
-            icon: <Code className="w-8 h-8" />,
-            title: "Web Development",
-            description: "Custom web applications built with modern frameworks and best practices",
-            features: ["React & Next.js", "Responsive Design", "Performance Optimization", "SEO Implementation"],
-            price: "From R15,000",
-            href: "/services/web-development",
-            color: "from-blue-500 to-cyan-500",
-            textColor: "text-blue-400"
-          },
-          {
-            icon: <Server className="w-8 h-8" />,
-            title: "API Development",
-            description: "Robust APIs and backend systems that power your applications",
-            features: ["REST & GraphQL APIs", "Database Integration", "Authentication", "Cloud Deployment"],
-            price: "From R20,000",
-            href: "/services/api-development",
-            color: "from-green-500 to-emerald-500",
-            textColor: "text-green-400"
-          },
-          {
-            icon: <FaWordpress className="w-8 h-8" />,
-            title: "WordPress Development",
-            description: "Professional WordPress websites with custom themes and functionality",
-            features: ["Custom Themes", "WooCommerce", "SEO Optimization", "Maintenance"],
-            price: "From R25,000",
-            href: "/services/wordpress",
-            color: "from-indigo-500 to-purple-500",
-            textColor: "text-indigo-400"
-          },
-          {
-            icon: <Globe className="w-8 h-8" />,
-            title: "Framer Development",
-            description: "Interactive websites with stunning animations and modern design",
-            features: ["Interactive Animations", "Responsive Design", "CMS Integration", "Fast Performance"],
-            price: "From R12,000",
-            href: "/services/framer",
-            color: "from-purple-500 to-pink-500",
-            textColor: "text-purple-400"
-          },
-      
-          {
-            icon: <Server className="w-8 h-8" />,
-            title: "Backend Development",
-            description: "Scalable server solutions and database architectures",
-            features: ["Server Architecture", "Database Design", "Security Implementation", "Cloud Deployment"],
-            price: "From R20,000",
-            href: "/services/backend",
-            color: "from-orange-500 to-red-500",
-            textColor: "text-orange-400"
-          },
-          {
-            icon: <Figma className="w-8 h-8" />,
-            title: "Figma Design",
-            description: "User-centered design solutions that drive engagement and conversions",
-            features: ["UI/UX Design", "Design Systems", "Prototyping", "User Research"],
-            price: "From R15,000",
-            href: "/services/figma-design",
-            color: "from-pink-500 to-rose-500",
-            textColor: "text-pink-400"
-          }
-        ];
+  // Get icon component based on icon name
+  const getIcon = (iconName: string) => {
+    const icons: { [key: string]: React.ReactElement } = {
+      Code: <Code className="w-8 h-8" />,
+      Server: <Server className="w-8 h-8" />,
+      Globe: <Globe className="w-8 h-8" />,
+      Figma: <Figma className="w-8 h-8" />
+    };
+    return icons[iconName] || <Code className="w-8 h-8" />;
+  };
 
-  const processSteps = [
-    {
-      number: "01",
-      title: "Discovery & Planning",
-      description: "We start by understanding your goals, target audience, and project requirements through detailed consultation."
-    },
-    {
-      number: "02", 
-      title: "Design & Development",
-      description: "Creating wireframes, designs, and developing your solution using modern technologies and best practices."
-    },
-    {
-      number: "03",
-      title: "Testing & Optimization",
-      description: "Rigorous testing, performance optimization, and ensuring everything works perfectly across all devices."
-    },
-    {
-      number: "04",
-      title: "Launch & Support",
-      description: "Deploying your project and providing ongoing support, maintenance, and updates as needed."
-    }
-  ];
+  const services = servicesData.services.map(service => ({
+    ...service,
+    icon: getIcon(service.icon)
+  }));
 
-  const stats = [
-    { number: "50+", label: "Projects Completed" },
-    { number: "100%", label: "Client Satisfaction" },
-    { number: "5+", label: "Years Experience" },
-    { number: "24/7", label: "Support Available" }
-  ];
+  const processSteps = servicesData.processSteps;
+  const stats = servicesData.stats;
 
   // Theme-aware classes
   const themeClasses = {
