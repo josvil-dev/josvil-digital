@@ -1,6 +1,6 @@
+
 'use client';
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
@@ -10,10 +10,7 @@ import {
   createBreadcrumbSchema,
   createProjectSchema 
 } from '../../lib/jsonld';
-import { 
-  Code, ExternalLink, Github, Star, Users, 
-  BookOpen, ArrowRight, Eye
-} from 'lucide-react';
+
 
 // Animation variants
 const fadeInUp = {
@@ -30,377 +27,41 @@ const staggerContainer = {
   }
 };
 
-// Work Tabs Component
+// Work Tabs Component (Modified to be 'Under Maintenance')
 function WorkTabsLayout({ isDarkMode }: { isDarkMode: boolean }) {
-  const [activeTab, setActiveTab] = React.useState(0);
-
-  const portfolioProjects = [
-    {
-      title: "E-Commerce Platform",
-      description: "A modern, scalable e-commerce solution built with Next.js and Stripe integration",
-      image: "/josvil.jpg", // Using available image as placeholder
-      technologies: ["Next.js", "React", "Stripe", "Tailwind CSS", "PostgreSQL"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/example",
-      featured: true
-    },
-    {
-      title: "SaaS Dashboard",
-      description: "Analytics dashboard for SaaS companies with real-time data visualization",
-      image: "/jos-vilanculo.jpg",
-      technologies: ["React", "D3.js", "Node.js", "MongoDB"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/example",
-      featured: false
-    },
-    {
-      title: "Mobile Banking App",
-      description: "Secure mobile banking application with biometric authentication",
-      image: "/josvil.jpg",
-      technologies: ["React Native", "Firebase", "TypeScript"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/example",
-      featured: false
-    }
-  ];
-
-  const caseStudies = [
-    {
-      title: "Redesigning User Onboarding",
-      client: "TechStartup Inc.",
-      duration: "3 months",
-      description: "Complete redesign of user onboarding flow resulting in 40% increase in user retention",
-      challenge: "High user drop-off rate during onboarding process",
-      solution: "Simplified multi-step process with progress indicators and interactive tutorials",
-      results: ["40% increase in user retention", "60% reduction in support tickets", "25% faster onboarding time"],
-      image: "/jos-vilanculo.jpg"
-    },
-    {
-      title: "E-commerce Performance Optimization",
-      client: "Fashion Retailer",
-      duration: "2 months", 
-      description: "Comprehensive performance audit and optimization of high-traffic e-commerce platform",
-      challenge: "Slow page load times affecting conversion rates",
-      solution: "Code splitting, image optimization, and caching strategies implementation",
-      results: ["50% faster page load times", "15% increase in conversion rate", "Improved SEO rankings"],
-      image: "/josvil.jpg"
-    }
-  ];
-
-  const contributions = [
-    {
-      title: "Open Source UI Library",
-      type: "Open Source",
-      description: "Contributing to a popular React component library used by 10k+ developers",
-      stats: "500+ commits, 50+ PRs merged",
-      technologies: ["React", "TypeScript", "Storybook"],
-      url: "https://github.com/example"
-    },
-    {
-      title: "Design System Documentation",
-      type: "Community",
-      description: "Created comprehensive design system guidelines for the developer community",
-      stats: "1000+ developers reached",
-      technologies: ["Figma", "Documentation", "Design Systems"],
-      url: "https://example.com"
-    },
-    {
-      title: "Tech Blog Articles",
-      type: "Content",
-      description: "Regular technical articles about modern web development practices",
-      stats: "25+ articles, 50k+ views",
-      technologies: ["Technical Writing", "Web Development", "Best Practices"],
-      url: "https://blog.example.com"
-    }
-  ];
-
-  const tabs = [
-    { name: "Portfolio", icon: <Code className="w-5 h-5" />, count: portfolioProjects.length },
-    { name: "Case Studies", icon: <BookOpen className="w-5 h-5" />, count: caseStudies.length },
-    { name: "Contributions", icon: <Users className="w-5 h-5" />, count: contributions.length }
-  ];
-
+  // All project data is no longer needed here as we are showing a maintenance message.
+  // The original arrays are commented out/removed for brevity but could be kept 
+  // if you plan to re-introduce the tabs later.
+  
   return (
-    <div>
-      {/* Tab Navigation */}
-      <div className="flex flex-wrap gap-2 mb-12">
-        {tabs.map((tab, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveTab(index)}
-            className={`flex items-center gap-3 px-6 py-4 rounded-xl font-semibold transition-all duration-300 ${
-              activeTab === index
-                ? isDarkMode 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                  : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                : isDarkMode
-                  ? 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
-            }`}
-          >
-            {tab.icon}
-            <span>{tab.name}</span>
-            <span className={`px-2 py-1 rounded-full text-xs ${
-              activeTab === index 
-                ? 'bg-white/20' 
-                : isDarkMode ? 'bg-white/10' : 'bg-gray-200'
-            }`}>
-              {tab.count}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {/* Tab Content */}
-      <motion.div
-        key={activeTab}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* Portfolio Tab */}
-        {activeTab === 0 && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioProjects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className={`group relative overflow-hidden rounded-2xl ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-br from-slate-800/60 to-slate-700/40 border border-white/10' 
-                    : 'bg-gradient-to-br from-white/80 to-gray-50/60 border border-gray-200/50 shadow-lg'
-                }`}
-              >
-                {project.featured && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold rounded-full">
-                      <Star className="w-3 h-3" />
-                      Featured
-                    </div>
-                  </div>
-                )}
-
-                {/* Project Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  
-                  {/* Overlay Links */}
-                  <div className="absolute top-4 left-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Link href={project.liveUrl} className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors">
-                      <ExternalLink className="w-4 h-4 text-white" />
-                    </Link>
-                    <Link href={project.githubUrl} className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors">
-                      <Github className="w-4 h-4 text-white" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6">
-                  <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-3`}>
-                    {project.title}
-                  </h3>
-                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4 leading-relaxed`}>
-                    {project.description}
-                  </p>
-                  
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          isDarkMode 
-                            ? 'bg-white/10 text-gray-300' 
-                            : 'bg-gray-100 text-gray-700'
-                        }`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* Case Studies Tab */}
-        {activeTab === 1 && (
-          <div className="space-y-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className={`group overflow-hidden rounded-2xl ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-br from-slate-800/60 to-slate-700/40 border border-white/10' 
-                    : 'bg-gradient-to-br from-white/80 to-gray-50/60 border border-gray-200/50 shadow-lg'
-                }`}
-              >
-                <div className="md:flex">
-                  {/* Image */}
-                  <div className="md:w-1/3">
-                    <div className="relative h-64 md:h-full">
-                      <Image
-                        src={study.image}
-                        alt={study.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="md:w-2/3 p-8">
-                    <div className="flex items-center gap-4 mb-4">
-                      <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {study.title}
-                      </h3>
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        isDarkMode ? 'bg-indigo-500/20 text-indigo-300' : 'bg-indigo-100 text-indigo-700'
-                      }`}>
-                        {study.duration}
-                      </span>
-                    </div>
-                    
-                    <p className={`${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'} font-medium mb-4`}>
-                      {study.client}
-                    </p>
-                    
-                    <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-6 leading-relaxed`}>
-                      {study.description}
-                    </p>
-                    
-                    <div className="grid md:grid-cols-3 gap-6">
-                      <div>
-                        <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
-                          Challenge
-                        </h4>
-                        <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {study.challenge}
-                        </p>
-                      </div>
-                      <div>
-                        <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
-                          Solution
-                        </h4>
-                        <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {study.solution}
-                        </p>
-                      </div>
-                      <div>
-                        <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
-                          Results
-                        </h4>
-                        <ul className="space-y-1">
-                          {study.results.map((result, resultIndex) => (
-                            <li key={resultIndex} className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} flex items-start gap-2`}>
-                              <div className="w-1 h-1 rounded-full bg-green-500 mt-2 flex-shrink-0" />
-                              {result}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* Contributions Tab */}
-        {activeTab === 2 && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {contributions.map((contribution, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                whileHover={{ y: -4 }}
-                className={`group p-6 rounded-2xl ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-br from-slate-800/60 to-slate-700/40 border border-white/10' 
-                    : 'bg-gradient-to-br from-white/80 to-gray-50/60 border border-gray-200/50 shadow-lg'
-                } hover:border-indigo-400/50 transition-all duration-300`}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    contribution.type === 'Open Source' 
-                      ? isDarkMode ? 'bg-green-500/20 text-green-300' : 'bg-green-100 text-green-700'
-                      : contribution.type === 'Community'
-                      ? isDarkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700'
-                      : isDarkMode ? 'bg-purple-500/20 text-purple-300' : 'bg-purple-100 text-purple-700'
-                  }`}>
-                    {contribution.type}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-indigo-400 transition-colors" />
-                </div>
-                
-                <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-3`}>
-                  {contribution.title}
-                </h3>
-                
-                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4 leading-relaxed`}>
-                  {contribution.description}
-                </p>
-                
-                <div className="mb-4">
-                  <p className={`text-sm font-medium ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
-                    {contribution.stats}
-                  </p>
-                </div>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {contribution.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className={`px-2 py-1 rounded text-xs ${
-                        isDarkMode 
-                          ? 'bg-white/10 text-gray-300' 
-                          : 'bg-gray-100 text-gray-700'
-                      }`}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                <Link 
-                  href={contribution.url}
-                  className={`inline-flex items-center gap-2 text-sm font-medium ${
-                    isDarkMode ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-600 hover:text-indigo-700'
-                  } transition-colors`}
-                >
-                  <Eye className="w-4 h-4" />
-                  View Details
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        )}
-      </motion.div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col items-center justify-center p-12 text-center"
+    >
+    
+      <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
+        Work Section Under Maintenance 🛠️
+      </h2>
+      <p className={`max-w-xl ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-lg`}>
+        I&aposm currently revamping my portfolio to showcase new, exciting projects and an improved structure. 
+        Please check back soon to see the updates! In the meantime, feel free to connect or view my code on 
+        <Link 
+          href="https://github.com/example" 
+          className={`ml-1 font-medium ${isDarkMode ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-600 hover:text-indigo-700'} transition-colors underline`}
+        >
+          GitHub
+        </Link>.
+      </p>
+    </motion.div>
   );
 }
 
 export default function Work() {
   const { isDarkMode } = useTheme();
 
-  // Create structured data
+  // Keep the structured data as it's good for SEO, even if the content is temporarily unavailable
   const personSchema = createPersonSchema();
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", url: "https://josvil.digital" },
@@ -410,8 +71,8 @@ export default function Work() {
   const portfolioPageSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Joshua Vilanculo Portfolio - Web Development Projects",
-    "description": "Explore Joshua Vilanculo's portfolio of web development projects, case studies, and open source contributions. Showcasing expertise in React, Next.js, and modern web technologies.",
+    "name": "Joshua Vilanculo Portfolio - Web Development Projects (Under Maintenance)",
+    "description": "Joshua Vilanculo's portfolio is currently undergoing maintenance. Showcasing expertise in React, Next.js, and modern web technologies.",
     "url": "https://josvil.digital/work",
     "author": {
       "@type": "Person",
@@ -421,49 +82,11 @@ export default function Work() {
       "@type": "Person",
       "name": "Joshua Vilanculo"
     },
-    "mainEntity": {
-      "@type": "ItemList",
-      "numberOfItems": 6,
-      "itemListElement": [
-        {
-          "@type": "CreativeWork",
-          "name": "E-Commerce Platform",
-          "description": "A modern, scalable e-commerce solution built with Next.js and Stripe integration",
-          "author": {
-            "@type": "Person",
-            "name": "Joshua Vilanculo"
-          },
-          "dateCreated": "2024",
-          "keywords": ["Next.js", "React", "Stripe", "E-commerce", "TypeScript"]
-        },
-        {
-          "@type": "CreativeWork", 
-          "name": "SaaS Dashboard",
-          "description": "Analytics dashboard for SaaS companies with real-time data visualization",
-          "author": {
-            "@type": "Person",
-            "name": "Joshua Vilanculo"
-          },
-          "dateCreated": "2024",
-          "keywords": ["React", "D3.js", "Node.js", "MongoDB", "Analytics"]
-        },
-        {
-          "@type": "CreativeWork",
-          "name": "Mobile Banking App", 
-          "description": "Secure mobile banking application with biometric authentication",
-          "author": {
-            "@type": "Person",
-            "name": "Joshua Vilanculo"
-          },
-          "dateCreated": "2023",
-          "keywords": ["React Native", "Firebase", "TypeScript", "Mobile", "Security"]
-        }
-      ]
-    },
+    // Removed 'mainEntity' for projects as the content is being hidden
     "inLanguage": "en"
   };
 
-  // Individual project schemas
+  // Remaining schemas are kept but could also be conditionally removed if desired
   const ecommerceProjectSchema = createProjectSchema({
     name: "E-Commerce Platform",
     description: "A modern, scalable e-commerce solution built with Next.js and Stripe integration",
@@ -548,7 +171,7 @@ export default function Work() {
     ]
   };
 
-  // Theme-aware classes
+  // Theme-aware classes remain unchanged
   const themeClasses = {
     container: isDarkMode ? "min-h-screen bg-slate-900" : "min-h-screen bg-gray-50",
     section: isDarkMode ? "relative py-20 lg:py-32 bg-slate-900 overflow-hidden" : "relative py-20 lg:py-32 bg-gray-50 overflow-hidden",
@@ -605,7 +228,7 @@ export default function Work() {
               digital experiences.
             </motion.p>
 
-            {/* Work Stats */}
+            {/* Work Stats (Kept for continuity) */}
             <motion.div 
               variants={fadeInUp}
               className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto"
@@ -629,7 +252,7 @@ export default function Work() {
             </motion.div>
           </motion.div>
 
-          {/* Work Tabs Section */}
+          {/* Work Tabs Section (Now Maintenance Section) */}
           <motion.div
             initial="initial"
             whileInView="animate"
@@ -642,8 +265,8 @@ export default function Work() {
             </motion.div>
           </motion.div>
         </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </>
   );
 }
