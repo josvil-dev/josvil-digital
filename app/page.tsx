@@ -67,7 +67,10 @@ export default function Home() {
 
   // Theme-aware classes
   const themeClasses = {
-    container: isDarkMode ? "min-h-screen bg-slate-900" : "min-h-screen bg-gray-50",
+    // Make the root container full-width and hide horizontal overflow to remove right-side gap on mobile
+    container: isDarkMode
+      ? "min-h-screen w-full overflow-x-hidden bg-slate-900"
+      : "min-h-screen w-full overflow-x-hidden bg-gray-50",
     section: isDarkMode ? "relative py-20 lg:py-32 bg-slate-900 overflow-hidden" : "relative py-20 lg:py-32 bg-gray-50 overflow-hidden",
     gradient: isDarkMode ? "absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800/50 to-slate-900" : "absolute inset-0 bg-gradient-to-b from-gray-50 via-gray-100/50 to-gray-50",
     backgroundBlur1: isDarkMode ? "absolute top-20 right-10 w-72 h-72 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-full blur-3xl" : "absolute top-20 right-10 w-72 h-72 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full blur-3xl",
@@ -108,7 +111,7 @@ export default function Home() {
           <div className={themeClasses.backgroundBlur1} />
           <div className={themeClasses.backgroundBlur2} />
 
-          <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+          <div className="relative max-w-full mx-auto px-6 md:px-10">
             <motion.div
               initial="initial"
               whileInView="animate"
@@ -280,7 +283,7 @@ export default function Home() {
                 {[
                   { title: "UI/UX DESIGN", delay: 0 },
                   { title: "WEB DEVELOPMENT", delay: 0.1 },
-                { title: "APP DEVELOPMENT", delay: 0.2 }
+                { title: "API INTEGRATION", delay: 0.2 }
                 ].map((service) => (
                   <motion.div
                     key={service.title}
@@ -369,7 +372,7 @@ export default function Home() {
         </section>
 
         {/* Featured Work Section */}
-        <section className={themeClasses.section}>
+        {/* <section className={themeClasses.section}>
           <div className={themeClasses.gradient} />
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-10">
@@ -467,7 +470,7 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         {/* Contact Section */}
         <section className={themeClasses.contactSection}>
@@ -526,7 +529,7 @@ export default function Home() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Link
-                    href="mailto:joshua@example.com"
+                    href="mailto:josvilanculo@gmail.com"
                     className={themeClasses.secondaryCTA}
                   >
                     <span>Send an Email</span>

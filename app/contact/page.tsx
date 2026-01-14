@@ -457,25 +457,25 @@ export default function Contact() {
     {
       icon: <Mail className="w-6 h-6" />,
       label: "Email",
-      value: "hello@josvil.dev",
-      link: "mailto:hello@josvil.dev"
+      value: "hello@josvil.digital",
+      link: "mailto:hello@josvil.digital"
     },
     {
       icon: <Phone className="w-6 h-6" />,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      value: "+27 63 953 3676",
+      link: "tel:+27639533676"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       label: "Location",
-      value: "New York, NY",
+      value: " Braamfontein, Johannesburg, South Africa",
       link: null
     },
     {
       icon: <Clock className="w-6 h-6" />,
       label: "Response Time",
-      value: "Within 24 hours",
+      value: "Within 2  hours",
       link: null
     }
   ];

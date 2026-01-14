@@ -122,7 +122,6 @@ const Hero = () => {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className={themeClasses.introText}
                         >
-                            Hi, my name is
                         </motion.p>
 
                         {/* Main Title */}
@@ -130,14 +129,14 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+                            className="text-3xl font-bold text-white md:text-5xl lg:text-7xl box"
                         >
                             <span className={themeClasses.nameGradient}>
-                                Joshua Vilanculo
+                               Hi! I&apos;m Joshua Vilanculo
                             </span>
                             <br />
                             <span className={themeClasses.taglineGradient}>
-                                I build things for the web.
+                               Let&apos;s Build your way but with my Expertise.
                             </span>
                         </motion.h1>
 
@@ -148,10 +147,9 @@ const Hero = () => {
                             transition={{ duration: 0.8, delay: 0.5 }}
                             className={themeClasses.description}
                         >
-                            I am a developer passionate about crafting{' '}
-                            <span className={themeClasses.accentText1}>accessible</span>,{' '}
-                            <span className={themeClasses.accentText2}>pixel-perfect</span> user interfaces
-                            that blend thoughtful design with robust engineering.
+                            I specialize in transforming complex{' '}
+                            <span className={themeClasses.accentText1}>business</span>,{' '} problems into {' '} 
+                            <span className={themeClasses.accentText2}>elegent</span>{' '}  high perfomance digital solutions that drive real-world engagement.
                         </motion.p>
 
                         {/* Buttons */}

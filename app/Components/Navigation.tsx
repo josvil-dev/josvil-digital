@@ -359,8 +359,8 @@ const Footer = () => {
                         <div className="space-y-3 mb-6">
                             <div className={`flex items-center gap-3 ${themeClasses.contactText}`}>
                                 <Mail size={18} className="text-indigo-400" />
-                                <a href="mailto:joshua@example.com" className={themeClasses.contactLink}>
-                                    josilanculo@gmail.com
+                                <a href="mailto:josvilanculo@gmail.com" className={themeClasses.contactLink}>
+                                    josvilanculo@gmail.com
                                 </a>
                             </div>
                             <div className={`flex items-center gap-3 ${themeClasses.contactText}`}>
@@ -371,7 +371,7 @@ const Footer = () => {
                             </div>
                             <div className={`flex items-center gap-3 ${themeClasses.contactText}`}>
                                 <MapPin size={18} className="text-indigo-400" />
-                                <span> South Africa</span>
+                                <span> Braamfontein, Johannesburg, South Africa</span>
                             </div>
                         </div>
 
