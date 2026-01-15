@@ -2,9 +2,8 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { BsWordpress } from 'react-icons/bs';
-import { FaCode, FaServer } from 'react-icons/fa';
-import { FaReact, FaNodeJs, FaPython, FaDatabase, FaFigma, FaAws, FaDocker, FaMobileAlt, FaPaintBrush, FaCloud, FaGithub, FaJs, FaHtml5, FaCss3Alt } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiTailwindcss, SiVercel, SiDrupal, SiGooglecloud, SiLaravel, SiWebflow, SiSharp, SiDotnet, SiPhp } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaDatabase, FaFigma, FaAws, FaDocker, FaMobileAlt, FaPaintBrush, FaCloud, FaGithub } from 'react-icons/fa';
+import { SiVercel, SiDrupal, SiGooglecloud, SiLaravel, SiDotnet, SiJoomla,  SiVuedotjs, SiRubyonrails, SiWebassembly, SiDigitalocean, SiSupabase, SiElementor,  } from 'react-icons/si';
 import { useTheme } from '../contexts/ThemeContext';
 
 const SkillsBento = () => {
@@ -78,61 +77,67 @@ const SkillsBento = () => {
     const skillsData = [
         {
             id: 1,
-            title: "Languages",
-            skills: [
-                "JavaScript (ES6+)", "TypeScript", "Python", "C#", "PHP", "HTML5", "CSS3", "Sass"
-            ],
-            icon: <FaCode />,
-            color: "from-blue-500 to-cyan-500",
-            size: "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
-            description: "Core programming languages I use to build applications",
+            title: "CMS",
+            skills: ["Joomla", "WordPress", "Drupal", "SharePoint"],
+            icon: <BsWordpress />,
+            color: "from-green-500 to-cyan-500",
+            size: "col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 row-span-2",
+            description: "Content management systems for corporate sites and intranets",
             toolIcons: [
-                <FaJs key="js" />,
-                <SiTypescript key="ts" />,
-                <FaPython key="python" />,
-                <SiSharp key="csharp" />,
-                <SiPhp key="php" />,
-                <FaHtml5 key="html" />,
-                <FaCss3Alt key="css" />
+                <SiJoomla key="joomla" />,
+                <BsWordpress key="wordpress" />,
+                <SiDrupal key="drupal" />,
+                
             ]
         },
         {
             id: 2,
-            title: "Frameworks",
-            skills: ["React", "Next.js", "Node.js", ".NET", "Laravel", "Tailwind CSS", "Bootstrap", "WordPress", "Drupal", "Webflow"],
+            title: "Web Technologies",
+            skills: ["React", ".NET", "Vue", "Laravel", "HTML5", "CSS3", "Ruby on Rails", "WASM"],
             icon: <FaReact />,
             color: "from-indigo-500 to-purple-500",
-            size: "col-span-1 row-span-2",
-            description: "Modern frameworks and libraries for efficient development",
+            size: "col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 row-span-2",
+            description: "Front-end and backend frameworks, modern tooling and runtimes",
             toolIcons: [
                 <FaReact key="react" />,
-                <SiNextdotjs key="next" />,
-                <FaNodeJs key="node" />,
                 <SiDotnet key="dotnet" />,
+                <SiVuedotjs key="vue" />,
                 <SiLaravel key="laravel" />,
-                <SiTailwindcss key="tailwind" />,
-                <BsWordpress key="wordpress" />,
-                <SiDrupal key="drupal" />,
-                <SiWebflow key="webflow" />
+                <SiRubyonrails key="rails" />,
+                <SiWebassembly key="wasm" />
             ]
         },
         {
             id: 3,
-            title: "Dev Tools",
-            skills: ["Git & GitHub", "VS Code", "Figma", "Docker", "AWS", "Azure", "Google Cloud", "Vercel"],
-            icon: <FaServer />,
+            title: "Cloud Infrastructures",
+            skills: ["DigitalOcean", "Supabase", "Google Cloud", "AWS", "Azure"],
+            icon: <FaCloud />,
             color: "from-purple-500 to-pink-500",
-            size: "col-span-1 row-span-2",
-            description: "Development tools and platforms I use daily",
+            size: "col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 row-span-2",
+            description: "Cloud platforms and managed services for hosting and data",
             toolIcons: [
-                <FaGithub key="github" />,
-                <FaFigma key="figma" />,
-                <FaDocker key="docker" />,
+                <SiDigitalocean key="do" />,
+                <SiSupabase key="supabase" />,
+                <SiGooglecloud key="gcp" />,
                 <FaAws key="aws" />,
-                <SiGooglecloud key="gcloud" />,
-                <SiVercel key="vercel" />
+                
             ]
         },
+        {
+            id: 4,
+            title: "Dev Tools",
+            skills: ["Docker", "VS Code", "Elementor", "Figma", "Vercel"],
+            icon: <FaDocker />,
+            color: "from-yellow-500 to-red-500",
+            size: "col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 row-span-2",
+            description: "Tooling and workflows for development, design and deployment",
+            toolIcons: [
+                <FaDocker key="docker" />,
+                <SiElementor key="elementor" />,
+                <FaFigma key="figma" />,
+                <SiVercel key="vercel" />
+            ]
+        }
     ];
 
     const fadeInUp = {
@@ -212,7 +217,7 @@ const SkillsBento = () => {
                         </span>
                     </motion.h2>
                     <motion.p variants={fadeInUp} className={themeClasses.description}>
-                        Interactive showcase of technologies I use to build scalable and performant applications
+                       The tools and technologies I use to build scalable and performant applications
                     </motion.p>
                 </motion.div>
                 {/* Bento Grid */}
@@ -223,32 +228,11 @@ const SkillsBento = () => {
                     variants={staggerContainer}
                     className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] sm:auto-rows-[200px] lg:auto-rows-[220px]"
                 >
-                    {skillsData.map((skill, idx) => {
-                        if (idx === 3) {
-                            // Replace the removed 4th card with the CTA
-                            return (
-                                <div key="cta-replace" className="flex items-center justify-center col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1 row-span-1">
-                                    <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 rounded-full border border-white/10 backdrop-blur-sm font-medium text-sm sm:text-base">
-                                        <span>✨</span>
-                                        <span className="hidden sm:inline">Always learning new technologies</span>
-                                        <span className="sm:hidden">Always learning</span>
-                                        <span>🚀</span>
-                                    </div>
-                                </div>
-                            );
-                        }
-                        // Make second and third cards same height as each other, and expand width on hover
+                    { /* Replace the old map that had a special-case CTA */ }
+                    {skillsData.map((skill) => {
                         let customSize = skill.size;
-                        // If second or third card is hovered, first card shrinks
-                        if (idx === 0 && (hoveredCard === 2 || hoveredCard === 3)) {
-                            customSize = 'col-span-1 row-span-2';
-                        }
-                        // Second and third cards expand on hover
-                        if ((idx === 1 || idx === 2)) {
-                            customSize = 'col-span-1 row-span-2';
-                            if (hoveredCard === skill.id) {
-                                customSize = 'col-span-2 row-span-2';
-                            }
+                        if ((skill.id === 2 || skill.id === 3) && hoveredCard === skill.id) {
+                            customSize = 'col-span-2 row-span-2';
                         }
                         return (
                             <motion.div
@@ -263,7 +247,7 @@ const SkillsBento = () => {
                                 className={`${customSize} ${themeClasses.card}`}
                                 style={{
                                     transformStyle: 'preserve-3d',
-                                    zIndex: hoveredCard === skill.id ? 20 : 1 // bring hovered card to front
+                                    zIndex: hoveredCard === skill.id ? 20 : 1
                                 }}
                             >
                                 {/* Gradient overlay on hover */}
