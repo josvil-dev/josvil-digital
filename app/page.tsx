@@ -135,7 +135,7 @@ export default function Home() {
                   <p>
                     I believe that great software is built with empathy, attention to detail, and a
                     deep understanding of user needs. My approach focuses on writing clean,
-                    maintainable code while delivering pixel-perfect interfaces.
+                    maintainable code while delivering pixel-perfect interfaces..
                   </p>
                 </div>
                 <motion.div
